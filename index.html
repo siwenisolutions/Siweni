@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Siweni Innovative Solutions — IT, Software, Data, Marketing, Cyber Security</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --card:#f8fafc;
+      --line:#e5e7eb;
+      --brand:#7aa7c7;
+      --brand2:#a6c7dd;
+      --radius:22px;
+      --shadow: 0 10px 30px rgba(17,24,39,.08);
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.35;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:22px 4px 60px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+      padding:6px 0 18px;
+    }
+    .burger{display:none; border:1px solid var(--line); background:#fff; width:38px; height:38px; border-radius:999px; place-items:center; cursor:pointer}
+    .brand{
+      display:flex; align-items:flex-start; gap:12px;
+    }
+    .brand img{display:block; height:40px}
+    .brand .mark{
+      width:36px; height:36px; border-radius:10px;
+      background:linear-gradient(135deg, #111827 0%, #6b7280 100%);
+      position:relative;
+    }
+    .brand .mark:before{
+      content:"";
+      position:absolute; left:10px; top:8px; width:16px; height:20px;
+      border-left:3px solid #fff;
+      box-shadow:
+        5px 0 0 #fff,
+        10px 0 0 #fff;
+      opacity:.9;
+    }
+    .brand .txt{display:flex; flex-direction:column; gap:2px}
+    .brand .txt strong{font-size:18px; letter-spacing:.2px}
+    .brand .txt span{font-size:12px; color:var(--muted); margin-top:-2px}
+
+    .nav{
+      display:flex; gap:22px; align-items:center; flex-wrap:wrap;
+      color:#111827;
+      font-size:14px;
+      font-weight:700;
+    }
+    .nav a{opacity:.85}
+    .nav a:hover{opacity:1}
+
+    /* HERO */
+    .hero{
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+      min-height:520px;
+      display:flex;
+      align-items:flex-end;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url('1.jpg');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      z-index:0;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.45));
+      pointer-events:none;
+      z-index:1;
+    }
+    .hero-inner{
+      position:relative;
+      padding:56px 42px;
+      width:min(620px, 100%);
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      z-index:2;
+    }
+    .hero h1{
+      margin:0;
+      color:#fff;
+      font-size:52px;
+      line-height:1.02;
+      letter-spacing:-.6px;
+    }
+    .hero p{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:16px;
+      max-width:46ch;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      border:0;
+      padding:12px 18px;
+      border-radius:999px;
+      background:#000000;
+      color:#ffffff;
+      font-weight:600;
+      font-size:14px;
+      width:max-content;
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0px)}
+    .hero .btn{background:#ffffff; color:#111827}
+    .hero-spacer{flex:1}
+
+    [data-reveal]{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease; will-change:opacity, transform}
+    [data-reveal].inview{opacity:1; transform:translateY(0)}
+    @keyframes heroZoom{from{transform:scale(1)} to{transform:scale(1.06)}}
+    .hero::before{animation:heroZoom 18s ease-in-out infinite alternate}
+    .card{transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-3px); box-shadow:0 12px 28px rgba(17,24,39,.12)}
+    .logo-pill{transition:transform .2s ease, background .2s ease}
+    .logo-pill:hover{transform:translateY(-1px); background:#f9fafb}
+
+    /* ABOUT */
+    .section{padding:34px 0 0}
+    .section h2{margin:0 0 12px; font-size:34px; letter-spacing:-.3px}
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .9fr;
+      gap:28px;
+      align-items:start;
+      margin-top:14px;
+    }
+    .about-text{
+      color:var(--muted);
+      font-size:14px;
+      max-width:70ch;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .stat{
+      padding:16px 16px;
+      border-radius:16px;
+      background: #fff;
+      border:1px solid var(--line);
+    }
+    .stat b{
+      display:block;
+      font-size:34px;
+      letter-spacing:-.6px;
+      margin-bottom:6px;
+    }
+    .stat span{display:block; color:var(--muted); font-size:12px}
+
+    .logos{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap:14px;
+      align-items:center;
+      opacity:.9;
+    }
+    .logo-pill{
+      display:flex; gap:10px; align-items:center; justify-content:flex-start;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:#111827;
+      background:#fff;
+    }
+    .logo-pill i{color:var(--muted)}
+    .logo-pill span{font-weight:600; font-size:13px}
+
+    /* CATALOG */
+    .catalog{
+      display:grid;
+      grid-template-columns: 1fr 2fr;
+      gap:22px;
+      align-items:start;
+      margin-top:14px;
+    }
+    .catalog .lead{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:6px;
+      max-width:30ch;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      align-items:stretch;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+      overflow:hidden;
+      box-shadow: 0 8px 20px rgba(17,24,39,.05);
+    }
+    .thumb{
+      height:160px;
+      background:
+        radial-gradient(800px 300px at 20% 20%, rgba(122,167,199,.45), transparent 60%),
+        linear-gradient(135deg, #e6eef6 0%, #c6d8e8 40%, #9bb8cf 100%);
+    }
+    .thumb.t2{
+      background:
+        radial-gradient(700px 300px at 40% 20%, rgba(122,167,199,.45), transparent 55%),
+        linear-gradient(135deg, #e8f1fb 0%, #b5d0e6 45%, #7aa7c7 100%);
+    }
+    .thumb.t3{
+      background:
+        radial-gradient(700px 300px at 30% 30%, rgba(122,167,199,.35), transparent 55%),
+        linear-gradient(135deg, #eef2f7 0%, #c9d5e3 45%, #93a7ba 100%);
+    }
+    .card-body{padding:12px 14px 14px}
+    .card-title{font-weight:700; margin:0 0 6px}
+    .card-sub{color:var(--muted); font-size:12px; margin:0}
+
+    .carousel-controls{
+      display:flex; justify-content:flex-end; gap:10px;
+      margin-top:14px;
+    }
+    .circle-btn{
+      width:38px; height:38px; border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      display:grid; place-items:center;
+      cursor:pointer;
+    }
+    .circle-btn:hover{background:#f9fafb}
+
+    /* HOW WE WORK */
+    .work{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:start;
+      margin-top:14px;
+    }
+    .work-visual{
+      position:relative;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      min-height:360px;
+    }
+    .work-visual::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url('2.jpg');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      z-index:0;
+    }
+    .badge{
+      position:absolute;
+      right:18px; top:18px;
+      width:132px; height:132px;
+      border-radius:999px;
+      background: rgba(0, 0, 0, 0.92);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:16px;
+      font-weight:800;
+      border: 2px solid #fff;
+      box-shadow: 0 16px 35px rgba(17,24,39,.18);
+    }
+    .badge span{display:block; font-weight:700; font-size:14px; line-height:1.15}
+
+    .steps{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .step{
+      display:flex; gap:14px;
+      padding:16px 16px;
+      border-top:1px solid var(--line);
+      align-items:flex-start;
+    }
+    .step:first-child{border-top:0}
+    .icon{
+      width:40px; height:40px; border-radius:999px;
+      border:1px solid var(--line);
+      display:grid; place-items:center;
+      color:#111827;
+      background:#fff;
+      flex:0 0 auto;
+    }
+    .step b{display:block; margin-bottom:4px}
+    .step p{margin:0; color:var(--muted); font-size:12px}
+
+    /* Small helper */
+    .muted{color:var(--muted)}
+    .hr{height:1px; background:var(--line); margin:26px 0 0}
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:22px;
+      align-items:start;
+      margin-top:14px;
+    }
+    .contact-card,
+    .contact-form{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+    }
+    .contact-card ul{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+    .contact-card li{display:flex; gap:10px; align-items:flex-start; color:var(--muted); font-size:14px}
+    .contact-card b{color:var(--text)}
+    .contact-form label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px}
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      color:inherit;
+      background:#fff;
+    }
+    .contact-form textarea{min-height:120px; resize:vertical}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .container{padding:22px 8px 60px}
+      .topbar{position:relative}
+      .burger{display:grid}
+      .nav{display:none; position:absolute; top:100%; right:0; left:auto; flex-direction:column; gap:12px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px; box-shadow:0 12px 30px rgba(17,24,39,.12); z-index:10}
+      .nav.open{display:flex}
+      .about-grid{grid-template-columns:1fr; }
+      .catalog{grid-template-columns:1fr; }
+      .cards{grid-template-columns:1fr; }
+      .logos{grid-template-columns: repeat(2, minmax(140px, 1fr));}
+      .work{grid-template-columns:1fr;}
+      .contact-grid{grid-template-columns:1fr;}
+      .hero-inner{padding:42px 22px}
+      .hero h1{font-size:40px}
+      .hero{min-height:420px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="topbar">
+      <a class="brand" href="#">
+        <img src="c:\Users\coach\Desktop\siweni\siweni_converted.png" alt="Brand logo">
+      </a>
+
+      <button class="burger" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+
+      <nav id="primary-nav" class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#catalog">Services</a>
+        <a href="#process">How we work</a>
+        <a href="#contacts">Contacts</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-inner" data-reveal>
+        <h1>IT, Software & Data Solutions</h1>
+        <p>We design software, analyze data, grow your brand, and secure your systems.</p>
+        <button class="btn" type="button">
+          Get a consultation
+        </button>
+      </div>
+      <div class="hero-spacer" aria-hidden="true"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <h2 data-reveal>About us</h2>
+
+      <div class="about-grid">
+        <div class="about-text" data-reveal>
+          <p>
+            We are a startup delivering end‑to‑end technology solutions — from software design
+            and application development to data science, digital marketing, and cyber security
+            consulting. We help businesses build, launch, and scale secure digital products.
+          </p>
+        </div>
+
+        <div class="stats" aria-label="Key stats">
+          <div class="stat" data-reveal>
+            <b>50+</b>
+            <span>projects delivered</span>
+          </div>
+          <div class="stat" data-reveal>
+            <b>20+</b>
+            <span>clients served</span>
+          </div>
+          <div class="stat" data-reveal>
+            <b>5</b>
+            <span>core service areas</span>
+          </div>
+          <div class="stat" data-reveal>
+            <b>95%</b>
+            <span>client satisfaction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="logos" aria-label="Partners">
+        <div class="logo-pill" data-reveal><i class="fa-solid fa-asterisk"></i><span>Logoipsum</span></div>
+        <div class="logo-pill" data-reveal><i class="fa-solid fa-snowflake"></i><span>Logoipsum</span></div>
+        <div class="logo-pill" data-reveal><i class="fa-solid fa-bolt"></i><span>Logoipsum</span></div>
+        <div class="logo-pill" data-reveal><i class="fa-regular fa-square"></i><span>Logoipsum</span></div>
+        <div class="logo-pill" data-reveal><i class="fa-solid fa-water"></i><span>Logoipsum</span></div>
+      </div>
+    </section>
+
+    <!-- Catalog -->
+    <section id="catalog" class="section">
+      <div class="catalog">
+        <div>
+          <h2 data-reveal>Our services</h2>
+          <p class="lead" data-reveal>End‑to‑end solutions across IT, software, data, marketing, and security</p>
+        </div>
+
+        <div>
+          <div class="cards" role="list">
+
+            <article class="card" role="listitem" data-reveal>
+              <div class="thumb" style="background: url('3.jpg') center/cover no-repeat;"></div>
+              <div class="card-body">
+                <p class="card-title">Software Design & Development</p>
+                <p class="card-sub">Web, mobile, and APIs</p>
+              </div>
+            </article>
+
+            <article class="card" role="listitem" data-reveal>
+              <div class="thumb" style="background: url('4.jpg') center/cover no-repeat;"></div>
+              <div class="card-body">
+                <p class="card-title">Data Science & Analytics</p>
+                <p class="card-sub">Dashboards, forecasting, and ML</p>
+              </div>
+            </article>
+
+            <article class="card" role="listitem" data-reveal>
+              <div class="thumb" style="background: url('5.png') center/cover no-repeat;"></div>
+              <div class="card-body">
+                <p class="card-title">Digital Marketing & SEO</p>
+                <p class="card-sub">Growth campaigns and content</p>
+              </div>
+            </article>
+            
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work -->
+    <section id="process" class="section">
+      <h2 data-reveal>How we work</h2>
+      <p class="muted" style="margin:0 0 14px; font-size:14px;">
+        A clear, collaborative delivery process from idea to launch and beyond.
+      </p>
+
+      <div class="work">
+        <div class="work-visual" aria-label="Illustration placeholder" data-reveal>
+          <div class="badge">
+            <span>Free<br/>consultation</span>
+          </div>
+        </div>
+
+        <div class="steps" aria-label="Steps">
+          <div class="step" data-reveal>
+            <div class="icon"><i class="fa-regular fa-comments"></i></div>
+            <div>
+              <b>Discovery & consultation</b>
+              <p>We map goals, constraints, and success metrics to shape the solution.</p>
+            </div>
+          </div>
+
+          <div class="step" data-reveal>
+            <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div>
+              <b>Solution design & proposal</b>
+              <p>We define architecture, roadmap, and estimate aligned to your budget.</p>
+            </div>
+          </div>
+
+          <div class="step" data-reveal>
+            <div class="icon"><i class="fa-solid fa-clipboard-check"></i></div>
+            <div>
+              <b>Build & iterate</b>
+              <p>We design, develop, and integrate with rapid feedback cycles.</p>
+            </div>
+          </div>
+
+          <div class="step" data-reveal>
+            <div class="icon"><i class="fa-regular fa-file-lines"></i></div>
+            <div>
+              <b>Security, testing & QA</b>
+              <p>We run security reviews, automated tests, and performance checks.</p>
+            </div>
+          </div>
+
+          <div class="step" data-reveal>
+            <div class="icon"><i class="fa-solid fa-handshake"></i></div>
+            <div>
+              <b>Deployment & support</b>
+              <p>We launch, monitor, and provide ongoing maintenance and growth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr" aria-hidden="true"></div>
+
+    <section id="contacts" class="section">
+      <h2 data-reveal>Contacts</h2>
+      <div class="contact-grid">
+        <div class="contact-card" aria-label="Contact details" data-reveal>
+          <ul>
+            <li><i class="fa-solid fa-phone"></i><span><b>Phone:</b> +263 78 169 5016</span></li>
+            <li><i class="fa-solid fa-envelope"></i><span><b>Email:</b> siwenisolutions@gmail.com</span></li>
+            <li><i class="fa-solid fa-location-dot"></i><span><b>Address:</b> 123 Business Ave, Johannesburg, SA</span></li>
+            <li><i class="fa-solid fa-clock"></i><span><b>Hours:</b> Mon–Fri, 9:00–17:00</span></li>
+          </ul>
+        </div>
+        <form id="contact-form" class="contact-form" aria-label="Contact form" action="#" method="post" data-reveal>
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text" placeholder="John Doe" required>
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" placeholder="you@example.com" required>
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" name="message" placeholder="How can we help?" required></textarea>
+          <div style="margin-top:12px;">
+            <button class="btn" type="submit">Send message</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll(".circle-btn").forEach(btn=>{btn.addEventListener("click",()=>alert("Demo control — connect this to your real catalog carousel."));});
+    const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("inview");io.unobserve(e.target);}})},{threshold:.15});
+    document.querySelectorAll("[data-reveal]").forEach(el=>io.observe(el));
+    const burger=document.querySelector(".burger"); const nav=document.getElementById("primary-nav");
+    if(burger&&nav){burger.addEventListener("click",()=>{const open=nav.classList.toggle("open"); burger.setAttribute("aria-expanded",open?"true":"false");});}
+    const cf=document.getElementById("contact-form");
+    if(cf){cf.addEventListener("submit",(e)=>{e.preventDefault();const n=document.getElementById("c-name").value.trim();const em=document.getElementById("c-email").value.trim();const m=document.getElementById("c-msg").value.trim();const subj=encodeURIComponent(`New enquiry from ${n||"Website"}`);const body=encodeURIComponent(`Name: ${n}\nEmail: ${em}\n\n${m}`);window.location.href=`mailto:siwenisolutions@gmail.com?subject=${subj}&body=${body}`;});}
+  </script>
+</body>
+</html>
