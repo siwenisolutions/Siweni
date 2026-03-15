@@ -36,15 +36,21 @@
     /* ── TOPBAR ── */
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:8px 16px 16px; position:sticky; top:0; z-index:100;
+      padding:8px 16px 16px; position:relative;
       background:#fff;
       border-bottom:1px solid var(--line);
       margin-bottom:4px;
       transition: box-shadow .25s ease;
     }
-    .topbar.scrolled{
+    .topbar.is-sticky{
+      position:fixed; top:0; left:0; right:0;
+      z-index:200;
+      padding-left: max(16px, calc((100vw - var(--max)) / 2 + 4px));
+      padding-right: max(16px, calc((100vw - var(--max)) / 2 + 4px));
       box-shadow: 0 4px 18px rgba(17,24,39,.08);
     }
+    .topbar-placeholder{ display:none; }
+    .topbar-placeholder.visible{ display:block; }
     .brand{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
     .brand img{ display:block; height:38px; }
     .brand .txt{ display:flex; flex-direction:column; gap:1px; }
@@ -652,8 +658,7 @@
     @media (max-width: 980px){
       html, body{overflow-x:hidden}
       .container{padding:22px 8px 60px}
-      .topbar{position:fixed; top:0; left:0; right:0; flex-wrap:wrap; gap:8px; padding:8px 12px 12px; margin-bottom:0; z-index:200;}
-      .container{padding-top:80px;}
+      .topbar{position:relative; flex-wrap:wrap; gap:8px;}
       .topbar-center{max-width:100%; order:3; flex:0 0 100%;}
       #topbar-lib-controls{order:3; flex:0 0 100%; margin:0 !important; max-width:100%;}
       #topbar-lib-right{order:2;}
@@ -2586,11 +2591,40 @@
     if(cf){cf.addEventListener("submit",(e)=>{e.preventDefault();const n=document.getElementById("c-name").value.trim();const em=document.getElementById("c-email").value.trim();const m=document.getElementById("c-msg").value.trim();const subj=encodeURIComponent("New message from "+n);const body=encodeURIComponent("Name: "+n+"\nEmail: "+em+"\n\nMessage:\n"+m);window.location.href="mailto:info@siweni.com?subject="+subj+"&body="+body;});}
 
 
-    /* ── STICKY TOPBAR SHADOW ON SCROLL ── */
-    window.addEventListener('scroll', () => {
+    /* ── STICKY TOPBAR ON SCROLL ── */
+    (function(){
       const topbar = document.querySelector('.topbar');
-      if(topbar) topbar.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+      let placeholder = document.createElement('div');
+      placeholder.className = 'topbar-placeholder';
+      topbar.parentNode.insertBefore(placeholder, topbar.nextSibling);
+      let topbarHeight = 0;
+      let topbarOffset = 0;
+
+      function measure(){
+        if(!topbar.classList.contains('is-sticky')){
+          topbarOffset = topbar.getBoundingClientRect().top + window.scrollY;
+          topbarHeight = topbar.offsetHeight;
+        }
+      }
+
+      function onScroll(){
+        if(window.scrollY > topbarOffset){
+          if(!topbar.classList.contains('is-sticky')){
+            topbarHeight = topbar.offsetHeight;
+            placeholder.style.height = topbarHeight + 'px';
+            placeholder.classList.add('visible');
+            topbar.classList.add('is-sticky');
+          }
+        } else {
+          topbar.classList.remove('is-sticky');
+          placeholder.classList.remove('visible');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => { topbar.classList.remove('is-sticky'); placeholder.classList.remove('visible'); measure(); onScroll(); });
+      measure();
+    })();
     /* ── MOBILE MENU ── */
     function toggleMobileMenu(){
       const btn = document.getElementById('hamburger-btn');
