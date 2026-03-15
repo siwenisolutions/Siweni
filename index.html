@@ -36,9 +36,14 @@
     /* ── TOPBAR ── */
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:8px 0 16px; position:relative;
+      padding:8px 16px 16px; position:sticky; top:0; z-index:100;
+      background:#fff;
       border-bottom:1px solid var(--line);
       margin-bottom:4px;
+      transition: box-shadow .25s ease;
+    }
+    .topbar.scrolled{
+      box-shadow: 0 4px 18px rgba(17,24,39,.08);
     }
     .brand{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
     .brand img{ display:block; height:38px; }
@@ -397,7 +402,7 @@
     .nav-library-link:hover{ background: #1f2937; transform: translateY(-1px); }
     @media (max-width: 980px){ .nav-library-link{ display:none; } }
     .mobile-welcome{ display:none; }
-    @media (max-width: 980px){ .mobile-welcome{ display:inline; margin-right: 20px; } }
+    @media (max-width: 980px){ .mobile-welcome{ display:inline; margin-right:80px; } }
 
     /* ══════════════════════════════════════
        LIBRARY — BLACK & WHITE THEME
@@ -1449,17 +1454,7 @@
             </div>
           </div>
 
-          <!-- Upload trigger zone -->
-          <div class="lib-upload-zone" onclick="openUploadModal()" style="cursor:pointer;">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <p><strong>Drag &amp; drop files here</strong> or click to add a document</p>
-            <div style="display:flex;justify-content:center;gap:18px;margin-top:12px;flex-wrap:wrap;">
-              <span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#6b7280;"><i class="fa-regular fa-image" style="color:#111827;"></i> Add cover image</span>
-              <span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#6b7280;"><i class="fa-regular fa-comment" style="color:#111827;"></i> Write a comment</span>
-              <span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#6b7280;"><i class="fa-regular fa-file-image" style="color:#111827;"></i> Use first page as cover</span>
-            </div>
-            <p style="margin-top:10px;font-size:11px;color:#9ca3af;">PDF, DOCX, PPTX, XLSX &middot; Max 50MB per file</p>
-          </div>
+
 
         </div><!-- /grid wrapper -->
       </div><!-- /lib-layout -->
@@ -2589,6 +2584,12 @@
     const cf=document.getElementById("contact-form");
     if(cf){cf.addEventListener("submit",(e)=>{e.preventDefault();const n=document.getElementById("c-name").value.trim();const em=document.getElementById("c-email").value.trim();const m=document.getElementById("c-msg").value.trim();const subj=encodeURIComponent("New message from "+n);const body=encodeURIComponent("Name: "+n+"\nEmail: "+em+"\n\nMessage:\n"+m);window.location.href="mailto:info@siweni.com?subject="+subj+"&body="+body;});}
 
+
+    /* ── STICKY TOPBAR SHADOW ON SCROLL ── */
+    window.addEventListener('scroll', () => {
+      const topbar = document.querySelector('.topbar');
+      if(topbar) topbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
     /* ── MOBILE MENU ── */
     function toggleMobileMenu(){
       const btn = document.getElementById('hamburger-btn');
