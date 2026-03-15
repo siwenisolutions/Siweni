@@ -396,6 +396,8 @@
     }
     .nav-library-link:hover{ background: #1f2937; transform: translateY(-1px); }
     @media (max-width: 980px){ .nav-library-link{ display:none; } }
+    .mobile-welcome{ display:none; }
+    @media (max-width: 980px){ .mobile-welcome{ display:inline; } }
 
     /* ══════════════════════════════════════
        LIBRARY — BLACK & WHITE THEME
@@ -1115,6 +1117,8 @@
         <a href="#library" class="nav-library-link" id="nav-lib-link" title="Open Library">
           <i class="fa-solid fa-books" style="margin-right:5px;"></i>Library
         </a>
+        <!-- Welcome (mobile only) -->
+        <span class="welcome mobile-welcome">Welcome to Our Platform !</span>
         <!-- Hamburger (mobile only) -->
         <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileMenu()">
           <span></span><span></span><span></span>
@@ -1125,7 +1129,10 @@
           <a href="#catalog" onclick="closeMobileMenu()"><i class="fa-solid fa-briefcase"></i> Services</a>
           <a href="#process" onclick="closeMobileMenu()"><i class="fa-solid fa-gears"></i> How we work</a>
           <a href="#contacts" onclick="closeMobileMenu()"><i class="fa-regular fa-envelope"></i> Contacts</a>
-
+          <div class="dropdown-divider"></div>
+          <a href="#library" class="dropdown-lib-link" id="nav-lib-link-mobile" onclick="closeMobileMenu()">
+            <i class="fa-solid fa-books"></i> Library
+          </a>
         </nav>
       </div>
 
@@ -2466,6 +2473,8 @@
       document.getElementById('viewer-backdrop').addEventListener('click', e => {
         if (e.target === document.getElementById('viewer-backdrop')) closeViewer();
       });
+      const mobLibLink = document.getElementById('nav-lib-link-mobile');
+      if(mobLibLink) mobLibLink.addEventListener('click', showLibrary);
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
