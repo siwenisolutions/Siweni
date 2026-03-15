@@ -652,7 +652,8 @@
     @media (max-width: 980px){
       html, body{overflow-x:hidden}
       .container{padding:22px 8px 60px}
-      .topbar{position:relative; flex-wrap:wrap; gap:8px;}
+      .topbar{position:fixed; top:0; left:0; right:0; flex-wrap:wrap; gap:8px; padding:8px 12px 12px; margin-bottom:0; z-index:200;}
+      .container{padding-top:80px;}
       .topbar-center{max-width:100%; order:3; flex:0 0 100%;}
       #topbar-lib-controls{order:3; flex:0 0 100%; margin:0 !important; max-width:100%;}
       #topbar-lib-right{order:2;}
