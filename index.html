@@ -33,81 +33,43 @@
     }
     a{color:inherit; text-decoration:none}
     .container{max-width:var(--max); margin:0 auto; padding:22px 4px 60px;}
-    /* ── TOPBAR ── */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:8px 16px 16px; position:relative;
-      background:#fff;
-      border-bottom:1px solid var(--line);
-      margin-bottom:4px;
-      transition: box-shadow .25s ease;
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+      padding:6px 0 18px; position:relative;
     }
-    .topbar.is-sticky{
-      position:fixed; top:0; left:0; right:0;
-      z-index:200;
-      padding-left: max(16px, calc((100vw - var(--max)) / 2 + 4px));
-      padding-right: max(16px, calc((100vw - var(--max)) / 2 + 4px));
-      box-shadow: 0 4px 18px rgba(17,24,39,.08);
+    .brand{
+      display:flex; align-items:flex-start; gap:12px;
     }
-    .topbar-placeholder{ display:none; }
-    .topbar-placeholder.visible{ display:block; }
-    .brand{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
-    .brand img{ display:block; height:38px; }
-    .brand .txt{ display:flex; flex-direction:column; gap:1px; }
-    .brand .txt strong{ font-size:16px; letter-spacing:.2px; line-height:1; }
-    .brand .txt span{ font-size:11px; color:var(--muted); }
+    .brand img{display:block; height:40px}
+    .brand .mark{
+      width:36px; height:36px; border-radius:10px;
+      background:linear-gradient(135deg, #111827 0%, #6b7280 100%);
+      position:relative;
+    }
+    .nav-wrap{display:flex; align-items:center; gap:12px}
+    .brand .mark:before{
+      content:"";
+      position:absolute; left:10px; top:8px; width:16px; height:20px;
+      border-left:3px solid #fff;
+      box-shadow:
+        5px 0 0 #fff,
+        10px 0 0 #fff;
+      opacity:.9;
+    }
+    .brand .txt{display:flex; flex-direction:column; gap:2px}
+    .brand .txt strong{font-size:18px; letter-spacing:.2px}
+    .brand .txt span{font-size:12px; color:var(--muted); margin-top:-2px}
 
-    .topbar-center{
-      display:flex; align-items:center; gap:8px; flex:1;
-      max-width:420px; margin:0 auto;
-    }
-    .topbar-search{
-      display:flex; align-items:center; gap:8px; flex:1;
-      border:1px solid var(--line); border-radius:999px;
-      padding:7px 14px; background:#f9fafb;
-    }
-    .topbar-search i{ color:var(--muted); font-size:13px; flex-shrink:0; }
-    .topbar-search input{
-      border:none; outline:none; font:inherit; font-size:13px;
-      color:var(--text); background:transparent; flex:1; min-width:0;
-    }
-
-    .topbar-right{ display:flex; align-items:center; gap:8px; flex-shrink:0; }
-    .topbar-icon-btn{
-      width:36px; height:36px; border-radius:999px;
-      border:1px solid var(--line); background:#fff;
-      display:grid; place-items:center; cursor:pointer;
-      color:var(--muted); font-size:13px; position:relative;
-      transition:background .2s, color .2s; flex-shrink:0;
-    }
-    .topbar-icon-btn:hover{ background:#f9fafb; color:var(--text); }
-    .topbar-badge{
-      position:absolute; top:-3px; right:-3px;
-      width:16px; height:16px; border-radius:999px;
-      background:#111827; color:#fff;
-      font-size:9px; font-weight:800; display:grid; place-items:center;
-      border:2px solid #fff; pointer-events:none;
-    }
-    .topbar-avatar{
-      width:36px; height:36px; border-radius:999px;
-      background:linear-gradient(135deg,#111827,#6b7280);
-      display:grid; place-items:center; cursor:pointer;
-      color:#fff; font-size:13px; font-weight:700;
-      border:2px solid var(--line); flex-shrink:0;
-      transition:opacity .2s;
-    }
-    .topbar-avatar:hover{ opacity:.85; }
-    .topbar-divider{ width:1px; height:22px; background:var(--line); }
-
-    .nav-wrap{ display:flex; align-items:center; gap:10px; }
     .nav{
-      display:flex; gap:18px; align-items:center;
-      color:#111827; font-size:14px; font-weight:700;
+      display:flex; gap:22px; align-items:center; flex-wrap:wrap;
+      color:#111827;
+      font-size:14px;
+      font-weight:700;
     }
-    #primary-nav{ position:static; transform:none; }
-    .nav a{ opacity:.8; white-space:nowrap; }
-    .nav a:hover{ opacity:1; }
-    .welcome{ font-size:13px; color:#6b7280; font-weight:600; white-space:nowrap; }
+    #primary-nav{position:static; transform:none;}
+    .nav a{opacity:.85}
+    .nav a:hover{opacity:1}
+    .welcome{font-size:14px; color:#6b7280; font-weight:600;}
 
     /* HERO */
     .hero{
@@ -399,800 +361,244 @@
 
     /* ── LIBRARY NAV LINK ── */
     .nav-library-link{
-      background: #111827; color: #fff !important;
-      padding: 7px 14px; border-radius: 999px;
-      opacity: 1 !important; font-weight: 700; font-size:14px;
-      display:inline-flex; align-items:center; gap:5px;
+      background: var(--brand);
+      color: #fff !important;
+      padding: 7px 14px;
+      border-radius: 999px;
+      opacity: 1 !important;
+      font-weight: 700;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .nav-library-link:hover{
+      background: #5a8fb5;
+      transform: translateY(-1px);
+    }
+
+    /* ── LIBRARY SECTION ── */
+    #library{ padding: 40px 0 0; }
+    #library h2{ margin: 0 0 6px; font-size: 34px; letter-spacing: -.3px; }
+    .lib-lead{ color: var(--muted); font-size: 14px; margin: 0 0 22px; }
+
+    .lib-toolbar{
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 14px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .lib-tabs{ display: flex; gap: 4px; background: #f1f5f9; border-radius: 999px; padding: 4px; }
+    .lib-tab{
+      padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none; background: transparent; color: var(--muted);
+      transition: background .2s, color .2s;
+    }
+    .lib-tab.active{ background: #fff; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .lib-search-wrap{
+      display: flex; align-items: center; gap: 8px;
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 8px 16px; background: #fff; flex: 1; max-width: 340px;
+    }
+    .lib-search-wrap i{ color: var(--muted); font-size: 13px; }
+    .lib-search-wrap input{
+      border: none; outline: none; font: inherit; font-size: 13px; color: var(--text);
+      background: transparent; flex: 1;
+    }
+    .lib-upload-btn{
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: 999px;
+      background: var(--text); color: #fff;
+      font-size: 13px; font-weight: 700; cursor: pointer; border: none;
       transition: background .2s, transform .2s;
     }
-    .nav-library-link:hover{ background: #1f2937; transform: translateY(-1px); }
-    @media (max-width: 980px){ .nav-library-link{ display:none; } }
-    .mobile-welcome{ display:none; }
-    @media (max-width: 980px){ .mobile-welcome{ display:inline; margin-right: 20px; } }
+    .lib-upload-btn:hover{ background: #374151; transform: translateY(-1px); }
 
-    /* ══════════════════════════════════════
-       LIBRARY — BLACK & WHITE THEME
-    ══════════════════════════════════════ */
-    #lib-view{
-      background: #fff;
-      padding-top: 24px;
-    }
-
-    /* Library hero banner */
-    .lib-hero{
-      background: transparent;
-      border-radius: 0;
-      padding: 20px 0 20px;
-      margin-bottom: 20px;
-      display: flex; align-items: center; justify-content: space-between; gap: 24px;
-      border-bottom: 1px solid var(--line);
-    }
-    .lib-hero-text h2{
-      color: #111827; margin: 0 0 4px; font-size: 26px; letter-spacing: -.4px;
-    }
-    .lib-hero-text p{ color: #6b7280; font-size: 14px; margin: 0; }
-    .lib-hero-stats{ display:flex; gap:28px; flex-shrink:0; }
-    .lib-hero-stat{ text-align:center; }
-    .lib-hero-stat b{ display:block; font-size:22px; color:#111827; letter-spacing:-.4px; font-weight:800; }
-    .lib-hero-stat span{ font-size:11px; color:#9ca3af; text-transform:uppercase; letter-spacing:.6px; }
-
-    /* ── TABS BASE ── */
-    .lib-tab{
-      padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
-      cursor: pointer; border: none; background: transparent; color: #6b7280;
-      transition: background .2s, color .2s; white-space:nowrap;
-    }
-    .lib-tab:hover{ color: #111827; }
-    .lib-tab.active{ background: #111827; color: #fff; }
-
-    /* Tabs in topbar pill strip */
-    .lib-tabs-topbar{
-      background: #f1f5f9; border-radius: 999px; padding: 4px;
-      display: flex; gap: 2px; flex-shrink:0; align-items:center;
-    }
-    .lib-tabs-topbar .lib-tab{
-      padding: 5px 12px; font-size: 12px;
-    }
-    .lib-tabs-topbar .lib-tab.active{
-      background: #111827; color: #fff;
-    }
-
-    /* Main layout */
     .lib-layout{
       display: grid;
       grid-template-columns: 220px 1fr;
-      gap: 32px;
+      gap: 22px;
       align-items: start;
     }
 
-    /* ── SIDEBAR (no bg) ── */
+    /* Sidebar */
     .lib-sidebar{
-      background: transparent;
-      border: none;
-      border-right: 1px solid var(--line);
-      border-radius: 0;
-      padding: 0 22px 0 0;
-      position: sticky;
-      top: 22px;
-      color: #111827;
+      background: #fff; border: 1px solid var(--line); border-radius: 22px;
+      padding: 18px; position: sticky; top: 22px;
     }
     .lib-sidebar-title{
-      font-size: 10px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.2px; color: #9ca3af; margin: 0 0 16px;
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); margin: 0 0 12px;
     }
-    .lib-filter-group{ margin-bottom: 22px; }
-    .lib-filter-group:last-of-type{ margin-bottom: 0; }
+    .lib-filter-group{ margin-bottom: 20px; }
+    .lib-filter-group:last-child{ margin-bottom: 0; }
     .lib-filter-label{
-      font-size: 11px; font-weight: 700; color: #6b7280;
-      margin-bottom: 10px; display: block; text-transform:uppercase; letter-spacing:.5px;
+      font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: block;
     }
     .lib-filter-item{
-      display: flex; align-items: center; gap: 9px;
-      font-size: 13px; color: #6b7280; padding: 5px 0; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted); padding: 4px 0; cursor: pointer;
     }
-    .lib-filter-item input[type=checkbox]{
-      accent-color: #111827; width: 14px; height: 14px; flex-shrink:0;
-    }
-    .lib-filter-item:hover{ color: #111827; }
+    .lib-filter-item input[type=checkbox]{ accent-color: var(--brand); width: 14px; height: 14px; }
+    .lib-filter-item:hover{ color: var(--text); }
     .lib-filter-count{
-      margin-left: auto; font-size: 11px;
-      background: #f1f5f9;
-      border-radius: 999px; padding: 2px 8px;
-      color: #9ca3af; font-weight: 600;
-    }
-    .lib-sidebar-divider{
-      height:1px; background: var(--line); margin: 18px 0;
+      margin-left: auto; font-size: 11px; background: #f1f5f9;
+      border-radius: 999px; padding: 1px 7px; color: var(--muted); font-weight: 600;
     }
     .lib-refine-btn{
       width: 100%; padding: 10px; border-radius: 999px;
-      background: #111827; color: #fff; border: none;
-      font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 16px;
-      transition: background .2s, transform .2s;
+      background: var(--brand); color: #fff; border: none;
+      font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 4px;
+      transition: background .2s;
     }
-    .lib-refine-btn:hover{ background: #1f2937; transform:translateY(-1px); }
-    .lib-reset-link{
-      display:block; text-align:center; margin:10px 0 0;
-      font-size:12px; color: #9ca3af; cursor:pointer;
-    }
-    .lib-reset-link:hover{ color: #111827; }
+    .lib-refine-btn:hover{ background: #5a8fb5; }
 
-    /* ── DOC GRID (B&W) ── */
+    /* Doc grid */
     .lib-grid{
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
+
     .doc-card{
-      background: #fff; border: 1px solid #e5e7eb;
-      border-radius: 16px; overflow: hidden;
-      box-shadow: 0 4px 14px rgba(0,0,0,.06);
-      transition: transform .22s ease, box-shadow .22s ease;
+      background: #fff; border: 1px solid var(--line);
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 6px 18px rgba(17,24,39,.05);
+      transition: transform .25s ease, box-shadow .25s ease;
       cursor: pointer;
     }
-    .doc-card:hover{ transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.12); }
+    .doc-card:hover{ transform: translateY(-4px); box-shadow: 0 14px 32px rgba(17,24,39,.12); }
 
     .doc-cover{
-      height: 140px; display: flex; align-items: center; justify-content: center;
+      height: 150px; display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
     }
-    .doc-cover[style*="background-image"]::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.45) 100%);
-      pointer-events:none;
+    .doc-cover-pdf{
+      background: linear-gradient(135deg, #fde8e8 0%, #fbb6b6 50%, #ef6c6c 100%);
     }
-    /* B&W covers — monochrome gradients */
-    .doc-cover-pdf{     background: linear-gradient(135deg,#1a1a1a 0%,#3d3d3d 50%,#5a5a5a 100%); }
-    .doc-cover-word{    background: linear-gradient(135deg,#0d0d0d 0%,#2e2e2e 50%,#4a4a4a 100%); }
-    .doc-cover-pptx{    background: linear-gradient(135deg,#222 0%,#444 50%,#666 100%); }
-    .doc-cover-xlsx{    background: linear-gradient(135deg,#111 0%,#333 50%,#555 100%); }
-    .doc-cover-generic{ background: linear-gradient(135deg,#f5f5f5 0%,#d4d4d4 50%,#aaa 100%); }
-
-    .doc-cover-icon{ font-size: 40px; opacity: .9; }
-    .doc-cover-pdf .doc-cover-icon,
-    .doc-cover-word .doc-cover-icon,
-    .doc-cover-pptx .doc-cover-icon,
-    .doc-cover-xlsx .doc-cover-icon{ color: rgba(255,255,255,.9); }
-    .doc-cover-generic .doc-cover-icon{ color: rgba(0,0,0,.4); }
-
+    .doc-cover-word{
+      background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 50%, #3b82f6 100%);
+    }
+    .doc-cover-pptx{
+      background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #f59e0b 100%);
+    }
+    .doc-cover-xlsx{
+      background: linear-gradient(135deg, #d1fae5 0%, #6ee7b7 50%, #10b981 100%);
+    }
+    .doc-cover-generic{
+      background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #94a3b8 100%);
+    }
+    .doc-cover-icon{
+      font-size: 44px; opacity: .85;
+    }
     .doc-cover-badge{
       position: absolute; top: 10px; left: 10px;
-      background: rgba(255,255,255,.18); color: #fff;
-      font-size: 9px; font-weight: 800; letter-spacing: 1px;
+      background: rgba(0,0,0,.55); color: #fff;
+      font-size: 10px; font-weight: 800; letter-spacing: .8px;
       padding: 3px 8px; border-radius: 999px; text-transform: uppercase;
-      backdrop-filter: blur(4px); border:1px solid rgba(255,255,255,.25);
     }
-    .doc-cover-generic .doc-cover-badge{ background:rgba(0,0,0,.2); color:#fff; }
     .doc-wishlist{
       position: absolute; top: 8px; right: 10px;
       width: 28px; height: 28px; border-radius: 999px;
-      background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.3);
-      cursor: pointer; display: grid; place-items: center;
-      font-size: 12px; color: rgba(255,255,255,.85);
-      transition: background .2s, color .2s; backdrop-filter:blur(4px);
+      background: rgba(255,255,255,.85); border: none; cursor: pointer;
+      display: grid; place-items: center; font-size: 12px; color: var(--muted);
+      transition: background .2s, color .2s;
     }
-    .doc-wishlist:hover{ background: rgba(255,255,255,.35); color: #fff; }
-    .doc-cover-generic .doc-wishlist{ background:rgba(0,0,0,.15); color:rgba(0,0,0,.5); }
+    .doc-wishlist:hover{ background: #fff; color: #ef4444; }
 
     .doc-body{ padding: 12px 14px 14px; }
-    .doc-type{
-      font-size: 10px; font-weight: 800; letter-spacing: .8px;
-      text-transform: uppercase; color: #111827; margin: 0 0 3px;
-    }
-    .doc-title{ font-weight: 700; font-size: 13px; margin: 0 0 4px; line-height: 1.3; color:#111827; }
-    .doc-meta{ color: #9ca3af; font-size: 11px; margin: 0 0 7px; }
-    .doc-stars{ display: flex; gap: 2px; font-size: 11px; margin-bottom: 6px; color:#111827; }
-    .doc-stars .empty{ color: #e5e7eb; }
+    .doc-type{ font-size: 10px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: var(--brand); margin: 0 0 4px; }
+    .doc-title{ font-weight: 700; font-size: 13px; margin: 0 0 4px; line-height: 1.3; }
+    .doc-meta{ color: var(--muted); font-size: 11px; margin: 0 0 8px; }
+    .doc-stars{ display: flex; gap: 2px; color: #fbbf24; font-size: 11px; margin-bottom: 6px; }
+    .doc-stars .empty{ color: #d1d5db; }
     .doc-actions{ display: flex; gap: 6px; margin-top: 8px; }
     .doc-btn{
-      flex: 1; padding: 7px 0; border-radius: 999px;
-      border: 1px solid #e5e7eb; background: #fff;
-      font-size: 11px; font-weight: 700; cursor: pointer; color: #111827;
-      transition: background .2s, border-color .2s;
+      flex: 1; padding: 7px 0; border-radius: 999px; border: 1px solid var(--line);
+      background: #fff; font-size: 11px; font-weight: 700; cursor: pointer; color: var(--text);
+      transition: background .2s;
     }
     .doc-btn:hover{ background: #f9fafb; }
-    .doc-btn.primary{
-      background: #111827; color: #fff; border-color: #111827;
-    }
-    .doc-btn.primary:hover{ background: #1f2937; }
+    .doc-btn.primary{ background: var(--brand); color: #fff; border-color: var(--brand); }
+    .doc-btn.primary:hover{ background: #5a8fb5; }
 
     /* Upload drop zone */
     .lib-upload-zone{
-      border: 2px dashed #d1d5db; border-radius: 18px;
-      padding: 32px 22px; text-align: center; background: #fafafa;
-      margin-top: 20px; transition: border-color .2s, background .2s;
-      cursor: pointer; display: block;
+      border: 2px dashed var(--line); border-radius: 22px;
+      padding: 36px 22px; text-align: center; background: #fafbfd;
+      margin-top: 22px; transition: border-color .2s, background .2s;
+      cursor: pointer;
     }
-    .lib-upload-zone:hover{ border-color: #111827; background: #f5f5f5; }
-    .lib-upload-zone i{ font-size: 28px; color: #111827; margin-bottom: 8px; display:block; }
-    .lib-upload-zone p{ margin: 0; color: #6b7280; font-size: 13px; }
-    .lib-upload-zone strong{ color: #111827; }
+    .lib-upload-zone:hover{ border-color: var(--brand); background: #f0f6fb; }
+    .lib-upload-zone i{ font-size: 32px; color: var(--brand); margin-bottom: 10px; }
+    .lib-upload-zone p{ margin: 0; color: var(--muted); font-size: 13px; }
+    .lib-upload-zone strong{ color: var(--text); }
 
     /* Pagination */
     .lib-pagination{
       display: flex; justify-content: space-between; align-items: center;
-      margin-top: 20px; font-size: 13px; color: #6b7280;
+      margin-top: 20px; font-size: 13px; color: var(--muted);
     }
     .lib-pages{ display: flex; gap: 4px; }
     .lib-page-btn{
       width: 32px; height: 32px; border-radius: 999px;
-      border: 1px solid #e5e7eb; background: #fff;
+      border: 1px solid var(--line); background: #fff;
       display: grid; place-items: center; cursor: pointer;
-      font-size: 12px; font-weight: 600; color: #111827;
+      font-size: 12px; font-weight: 600; color: var(--text);
       transition: background .2s;
     }
     .lib-page-btn:hover{ background: #f9fafb; }
-    .lib-page-btn.active{ background: #111827; color: #fff; border-color: #111827; }
-    .lib-page-btn.arrow{ color: #6b7280; font-size: 11px; }
+    .lib-page-btn.active{ background: var(--brand); color: #fff; border-color: var(--brand); }
+    .lib-page-btn.arrow{ color: var(--muted); font-size: 11px; }
 
-    /* Upload btn (used in topbar) */
-    .lib-upload-btn{
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 8px 16px; border-radius: 999px;
-      background: #111827; color: #fff;
-      font-size: 13px; font-weight: 700; cursor: pointer; border: none;
-      transition: background .2s, transform .2s; white-space:nowrap;
+    @media (max-width: 768px){
+      .lib-layout{ grid-template-columns: 1fr; }
+      .lib-grid{ grid-template-columns: repeat(2, 1fr); }
+      .lib-sidebar{ position: static; }
     }
-    .lib-upload-btn:hover{ background: #1f2937; transform: translateY(-1px); }
-
-    /* ── BACK BUTTON ── */
-    /* ── BACK BUTTON ── */
-    .nav-back-btn{
-      display:inline-flex; align-items:center; gap:7px; padding:7px 14px;
-      border-radius:999px; border:1px solid var(--line); background:#fff;
-      font-size:13px; font-weight:700; color:var(--text); cursor:pointer;
-      transition:background .2s, transform .2s;
+    @media (max-width: 540px){
+      .lib-grid{ grid-template-columns: 1fr; }
     }
-    .nav-back-btn:hover{ background:#f9fafb; transform:translateY(-1px); }
-
-    /* ── LIBRARY PAGE REVEAL ── */
-    [data-reveal-lib]{ opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease; }
-    [data-reveal-lib].inview{ opacity:1; transform:translateY(0); }
-
-    /* Mobile filter strip — hidden on desktop */
-    .lib-mobile-filters{ display:none; }
-    .lib-tabs-desktop{ display:flex; }
-    .lib-tabs-mobile{ width:100%; overflow-x:auto; scrollbar-width:none; }
-    .lib-tabs-mobile::-webkit-scrollbar{ display:none; }
 
     /* Responsive */
     @media (max-width: 980px){
       html, body{overflow-x:hidden}
       .container{padding:22px 8px 60px}
-      .topbar{position:relative; flex-wrap:wrap; gap:8px;}
-      .topbar-center{max-width:100%; order:3; flex:0 0 100%;}
-      #topbar-lib-controls{order:3; flex:0 0 100%; margin:0 !important; max-width:100%;}
-      #topbar-lib-right{order:2;}
+      .topbar{position:relative}
       .nav-wrap{position:relative}
       .nav{display:none}
       .nav a{display:inline-block; padding:8px 10px; border-radius:8px; text-align:left; width:auto}
       .nav a:hover{background:#f9fafb}
-      .welcome{font-size:12px;}
-      .about-grid{grid-template-columns:1fr;}
-      .catalog{grid-template-columns:1fr;}
-      .cards{grid-template-columns:1fr;}
+      .welcome{display:block; position:absolute; top:18px; right:8px; left:auto; transform:none; text-align:right}
+      .about-grid{grid-template-columns:1fr; }
+      .catalog{grid-template-columns:1fr; }
+      .cards{grid-template-columns:1fr; }
       .logos{grid-template-columns: repeat(2, minmax(140px, 1fr));}
       .work{grid-template-columns:1fr;}
       .contact-grid{grid-template-columns:1fr;}
       .hero-inner{padding:42px 22px}
       .hero h1{font-size:40px}
       .hero{min-height:420px}
-      /* Library mobile layout */
-      .lib-layout{grid-template-columns:1fr;}
-      .lib-sidebar{display:none;} /* hidden on mobile — filters are in topbar */
-      .lib-grid{grid-template-columns:repeat(2,1fr);}
-      .lib-hero{flex-direction:column; gap:12px; padding:14px 0;}
-      .lib-hero-stats{gap:16px;}
-      .lib-mobile-filters{display:block;}
-      .lib-tabs-desktop{display:none;}
     }
-    @media (max-width: 540px){
-      .lib-grid{grid-template-columns:1fr;}
-      .lib-hero-stats{gap:12px;}
-    }
-
-    /* ══ UPLOAD MODAL ══ */
-    .upload-modal-backdrop{
-      position:fixed; inset:0; background:rgba(0,0,0,.55);
-      backdrop-filter:blur(4px); z-index:1000;
-      display:none; align-items:center; justify-content:center;
-      padding:16px;
-    }
-    .upload-modal-backdrop.open{ display:flex; }
-    .upload-modal{
-      background:#fff; border-radius:24px;
-      width:100%; max-width:560px;
-      box-shadow:0 32px 80px rgba(0,0,0,.22);
-      overflow:hidden; display:flex; flex-direction:column;
-      max-height:90vh;
-    }
-    .upload-modal-header{
-      padding:22px 24px 0;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .upload-modal-header h3{ margin:0; font-size:18px; letter-spacing:-.2px; }
-    .upload-modal-close{
-      width:32px; height:32px; border-radius:999px; border:1px solid #e5e7eb;
-      background:#fff; cursor:pointer; display:grid; place-items:center;
-      font-size:14px; color:#6b7280; transition:background .2s;
-    }
-    .upload-modal-close:hover{ background:#f9fafb; color:#111827; }
-    .upload-modal-body{ padding:20px 24px; overflow-y:auto; flex:1; }
-
-    /* Step indicator */
-    .upload-steps{
-      display:flex; align-items:center; gap:6px; margin-bottom:20px;
-    }
-    .upload-step-dot{
-      width:28px; height:28px; border-radius:999px;
-      background:#f1f5f9; border:2px solid #e5e7eb;
-      display:grid; place-items:center; font-size:11px; font-weight:700;
-      color:#9ca3af; flex-shrink:0; transition:all .2s;
-    }
-    .upload-step-dot.active{ background:#111827; border-color:#111827; color:#fff; }
-    .upload-step-dot.done{ background:#111827; border-color:#111827; color:#fff; }
-    .upload-step-line{ flex:1; height:2px; background:#e5e7eb; }
-    .upload-step-line.done{ background:#111827; }
-
-    /* File drop area inside modal */
-    .modal-drop-area{
-      border:2px dashed #d1d5db; border-radius:14px;
-      padding:28px 20px; text-align:center; cursor:pointer;
-      transition:border-color .2s, background .2s; background:#fafafa;
-    }
-    .modal-drop-area:hover,.modal-drop-area.dragover{
-      border-color:#111827; background:#f5f5f5;
-    }
-    .modal-drop-area i{ font-size:32px; color:#111827; margin-bottom:8px; display:block; }
-    .modal-drop-area p{ margin:0; font-size:13px; color:#6b7280; }
-    .modal-drop-area strong{ color:#111827; }
-
-    /* Cover image section */
-    .cover-options{ display:flex; gap:12px; margin-top:4px; }
-    .cover-option{
-      flex:1; border:2px solid #e5e7eb; border-radius:14px;
-      padding:16px 12px; text-align:center; cursor:pointer;
-      transition:border-color .2s, background .2s; background:#fff;
-    }
-    .cover-option:hover{ border-color:#111827; background:#fafafa; }
-    .cover-option.selected{ border-color:#111827; background:#f9fafb; }
-    .cover-option i{ font-size:22px; color:#111827; margin-bottom:6px; display:block; }
-    .cover-option span{ font-size:12px; font-weight:700; display:block; color:#111827; }
-    .cover-option small{ font-size:11px; color:#9ca3af; margin-top:2px; display:block; }
-
-    .cover-preview-wrap{
-      width:100%; height:130px; border-radius:12px;
-      border:1px solid #e5e7eb; overflow:hidden;
-      display:none; position:relative; background:#f9fafb;
-    }
-    .cover-preview-wrap.visible{ display:block; }
-    .cover-preview-wrap img{ width:100%; height:100%; object-fit:cover; }
-    .cover-preview-wrap .remove-cover{
-      position:absolute; top:8px; right:8px;
-      width:24px; height:24px; border-radius:999px;
-      background:rgba(0,0,0,.6); border:none; cursor:pointer;
-      display:grid; place-items:center; color:#fff; font-size:11px;
-    }
-
-    /* Form fields in modal */
-    .upload-field{ margin-top:16px; }
-    .upload-field label{
-      display:block; font-size:11px; font-weight:700;
-      text-transform:uppercase; letter-spacing:.5px;
-      color:#6b7280; margin-bottom:6px;
-    }
-    .upload-field input,
-    .upload-field textarea,
-    .upload-field select{
-      width:100%; border:1px solid #e5e7eb; border-radius:10px;
-      padding:9px 12px; font:inherit; font-size:13px;
-      color:#111827; background:#fff; outline:none;
-      transition:border-color .2s;
-    }
-    .upload-field input:focus,
-    .upload-field textarea:focus,
-    .upload-field select:focus{ border-color:#111827; }
-    .upload-field textarea{ min-height:72px; resize:vertical; }
-
-    .upload-file-name{
-      display:none; align-items:center; gap:10px;
-      background:#f9fafb; border-radius:10px; padding:10px 14px;
-      margin-top:10px;
-    }
-    .upload-file-name.visible{ display:flex; }
-    .upload-file-name i{ color:#111827; font-size:16px; flex-shrink:0; }
-    .upload-file-name span{ font-size:13px; font-weight:600; color:#111827; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .upload-file-name small{ font-size:11px; color:#9ca3af; flex-shrink:0; }
-
-    /* Modal footer */
-    .upload-modal-footer{
-      padding:16px 24px; border-top:1px solid #f1f5f9;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .upload-modal-footer-left{ display:flex; gap:8px; align-items:center; }
-    .modal-btn{
-      padding:9px 20px; border-radius:999px; font-size:13px; font-weight:700;
-      cursor:pointer; transition:background .2s, transform .2s; border:none;
-    }
-    .modal-btn-secondary{
-      background:#f1f5f9; color:#111827; border:1px solid #e5e7eb;
-    }
-    .modal-btn-secondary:hover{ background:#e5e7eb; }
-    .modal-btn-primary{
-      background:#111827; color:#fff;
-    }
-    .modal-btn-primary:hover{ background:#1f2937; transform:translateY(-1px); }
-    .modal-btn-primary:disabled{ background:#d1d5db; cursor:not-allowed; transform:none; }
-
-    /* Progress bar */
-    .upload-progress{ margin-top:12px; display:none; }
-    .upload-progress.visible{ display:block; }
-    .upload-progress-bar{
-      height:4px; background:#f1f5f9; border-radius:999px; overflow:hidden;
-    }
-    .upload-progress-fill{
-      height:100%; background:#111827; border-radius:999px;
-      width:0%; transition:width .4s ease;
-    }
-    .upload-progress-label{
-      font-size:11px; color:#9ca3af; margin-top:6px; text-align:center;
-    }
-
-
-    /* ══ VIEWER SIDEBAR (ratings + comments) ══ */
-    .viewer-backdrop{
-      position:fixed; inset:0; background:rgba(0,0,0,.72);
-      backdrop-filter:blur(6px); z-index:2000;
-      display:none; flex-direction:column;
-      width:100vw; height:100vh;
-    }
-    .viewer-backdrop.open{ display:flex; }
-
-    .viewer-topbar{
-      flex-shrink:0; background:#111827; color:#fff;
-      display:flex; align-items:center; gap:12px; padding:10px 18px;
-      border-bottom:1px solid rgba(255,255,255,.1);
-    }
-    .viewer-close-btn{
-      width:32px; height:32px; border-radius:999px;
-      background:rgba(255,255,255,.1); border:none; cursor:pointer;
-      color:#fff; font-size:14px; display:grid; place-items:center;
-      flex-shrink:0; transition:background .2s;
-    }
-    .viewer-close-btn:hover{ background:rgba(255,255,255,.2); }
-    .viewer-title{
-      font-size:15px; font-weight:700; flex:1;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .viewer-meta{ font-size:12px; color:rgba(255,255,255,.5); white-space:nowrap; }
-    .viewer-topbar-btn{
-      display:inline-flex; align-items:center; gap:6px;
-      padding:6px 14px; border-radius:999px; font-size:12px; font-weight:700;
-      background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.2);
-      cursor:pointer; white-space:nowrap; text-decoration:none;
-      transition:background .2s;
-    }
-    .viewer-topbar-btn:hover{ background:rgba(255,255,255,.22); }
-
-    /* Main area: reader + sidebar */
-    .viewer-main{
-      flex:1; display:flex; overflow:hidden; min-height:0;
-      height:calc(100vh - 52px);
-    }
-
-    /* Doc reader pane */
-    .viewer-body{
-      flex:1; overflow-y:auto; background:#f4f4f5;
-      display:flex; flex-direction:column;
-      min-height:0;
-    }
-    .viewer-reader{
-      max-width:760px; margin:0 auto; width:100%;
-      background:#fff; min-height:100%;
-      box-shadow:0 0 0 1px rgba(0,0,0,.06);
-      flex-shrink:0;
-    }
-    .viewer-reader-inner{
-      padding:48px 56px;
-      font-size:15px; line-height:1.7; color:#111827;
-    }
-    .viewer-reader-inner h1{ font-size:28px; margin:0 0 6px; letter-spacing:-.4px; }
-    .viewer-reader-inner h2{ font-size:18px; margin:28px 0 10px; border-bottom:1px solid #e5e7eb; padding-bottom:6px; }
-    .viewer-reader-inner h3{ font-size:15px; margin:20px 0 8px; }
-    .viewer-reader-inner p{ margin:0 0 14px; }
-    .viewer-reader-inner ul, .viewer-reader-inner ol{ margin:0 0 14px; padding-left:22px; }
-    .viewer-reader-inner li{ margin-bottom:5px; }
-    .viewer-reader-inner table{ width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
-    .viewer-reader-inner th{ background:#111827; color:#fff; padding:9px 12px; text-align:left; font-size:11px; letter-spacing:.4px; }
-    .viewer-reader-inner td{ padding:9px 12px; border-bottom:1px solid #e5e7eb; vertical-align:top; }
-    .viewer-reader-inner tr:last-child td{ border-bottom:none; }
-    .viewer-reader-inner tr:nth-child(even) td{ background:#f9fafb; }
-    .viewer-reader-inner .callout{
-      background:#f9fafb; border-left:3px solid #111827;
-      padding:12px 16px; border-radius:0 10px 10px 0;
-      margin:16px 0; font-size:13px; color:#374151;
-    }
-    .doc-byline{ font-size:12px; color:#9ca3af; margin:0 0 24px !important; }
-    .metric-row{ display:flex; gap:16px; margin:16px 0; }
-    .metric{
-      flex:1; background:#f9fafb; border-radius:12px; padding:14px;
-      text-align:center; border:1px solid #e5e7eb;
-    }
-    .metric b{ display:block; font-size:24px; letter-spacing:-.5px; }
-    .metric span{ font-size:11px; color:#9ca3af; text-transform:uppercase; letter-spacing:.4px; }
-    .tag{
-      display:inline-block; background:#111827; color:#fff;
-      font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
-      padding:2px 8px; border-radius:4px; margin-right:6px;
-    }
-    .viewer-reader-footer{
-      padding:20px 56px; font-size:12px; color:#9ca3af;
-      border-top:1px solid #e5e7eb; background:#fafafa;
-    }
-    .viewer-iframe-wrap{ flex:1; display:flex; flex-direction:column; }
-    .viewer-iframe-wrap iframe{
-      flex:1; border:none; width:100%; height:100%; min-height:70vh;
-    }
-    .viewer-upload-notice{
-      flex:1; display:flex; flex-direction:column; align-items:center;
-      justify-content:center; gap:10px; color:#9ca3af; font-size:14px; text-align:center;
-      padding:40px;
-    }
-    .viewer-upload-notice i{ font-size:40px; color:#d1d5db; }
-
-    /* ── RIGHT SIDEBAR ── */
-    .viewer-sidebar{
-      width:300px; flex-shrink:0; background:#fff;
-      border-left:1px solid #e5e7eb; display:flex; flex-direction:column;
-      overflow:hidden; min-height:0;
-    }
-    .viewer-sidebar-tabs{
-      display:flex; border-bottom:1px solid #e5e7eb; flex-shrink:0;
-    }
-    .viewer-sidebar-tab{
-      flex:1; padding:13px 8px; font-size:12px; font-weight:700;
-      text-align:center; cursor:pointer; color:#9ca3af;
-      border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
-      background:none; border-top:none; border-left:none; border-right:none;
-    }
-    .viewer-sidebar-tab.active{ color:#111827; border-bottom-color:#111827; }
-
-    .viewer-sidebar-panel{ display:none; flex:1; overflow-y:auto; flex-direction:column; }
-    .viewer-sidebar-panel.active{ display:flex; }
-
-    /* Rating panel */
-    .rating-section{ padding:20px; border-bottom:1px solid #f1f5f9; }
-    .rating-section-label{
-      font-size:10px; font-weight:800; text-transform:uppercase;
-      letter-spacing:.8px; color:#9ca3af; margin:0 0 10px;
-    }
-    .star-picker{ display:flex; gap:4px; margin-bottom:10px; }
-    .star-picker i{
-      font-size:22px; cursor:pointer; color:#d1d5db;
-      transition:color .1s, transform .1s;
-    }
-    .star-picker i.lit{ color:#111827; }
-    .star-picker i:hover{ transform:scale(1.15); }
-    .rating-avg-row{
-      display:flex; align-items:center; gap:8px; margin-top:6px;
-    }
-    .rating-avg-num{ font-size:26px; font-weight:800; letter-spacing:-.5px; }
-    .rating-avg-detail{ font-size:11px; color:#9ca3af; }
-    .rating-avg-stars{ display:flex; gap:2px; }
-    .rating-avg-stars i{ font-size:11px; color:#111827; }
-    .rating-avg-stars i.empty{ color:#e5e7eb; }
-    .rating-bar-row{ display:flex; align-items:center; gap:6px; margin-top:10px; }
-    .rating-bar-label{ font-size:11px; color:#6b7280; width:10px; text-align:right; flex-shrink:0; }
-    .rating-bar-track{ flex:1; height:5px; background:#f1f5f9; border-radius:999px; overflow:hidden; }
-    .rating-bar-fill{ height:100%; background:#111827; border-radius:999px; }
-    .rating-bar-count{ font-size:11px; color:#9ca3af; width:14px; flex-shrink:0; }
-    .rating-submit-btn{
-      width:100%; padding:9px; border-radius:999px; background:#111827; color:#fff;
-      border:none; font-size:12px; font-weight:700; cursor:pointer; margin-top:10px;
-      transition:background .2s;
-    }
-    .rating-submit-btn:hover{ background:#1f2937; }
-    .rating-submit-btn:disabled{ background:#d1d5db; cursor:not-allowed; }
-
-    /* Comments panel */
-    .comments-list{ flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
-    .comment-item{
-      background:#f9fafb; border-radius:12px; padding:12px 14px;
-      border:1px solid #f1f5f9;
-    }
-    .comment-header{ display:flex; align-items:center; gap:8px; margin-bottom:6px; }
-    .comment-avatar{
-      width:26px; height:26px; border-radius:999px;
-      background:#111827; color:#fff; display:grid; place-items:center;
-      font-size:11px; font-weight:700; flex-shrink:0;
-    }
-    .comment-author{ font-size:12px; font-weight:700; color:#111827; flex:1; }
-    .comment-time{ font-size:11px; color:#9ca3af; }
-    .comment-stars{ display:flex; gap:2px; margin-bottom:5px; }
-    .comment-stars i{ font-size:10px; color:#111827; }
-    .comment-stars i.empty{ color:#e5e7eb; }
-    .comment-text{ font-size:13px; color:#374151; line-height:1.5; margin:0; }
-    .comment-empty{
-      text-align:center; padding:32px 16px; color:#9ca3af; font-size:13px;
-    }
-    .comment-empty i{ font-size:28px; display:block; margin-bottom:8px; }
-
-    /* Add comment form */
-    .comment-form{
-      padding:14px; border-top:1px solid #e5e7eb; flex-shrink:0;
-      display:flex; flex-direction:column; gap:8px;
-    }
-    .comment-form textarea{
-      width:100%; border:1px solid #e5e7eb; border-radius:10px;
-      padding:9px 12px; font:inherit; font-size:13px; color:#111827;
-      background:#fff; outline:none; resize:none; min-height:70px;
-      transition:border-color .2s;
-    }
-    .comment-form textarea:focus{ border-color:#111827; }
-    .comment-form-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
-    .comment-rating-pick{ display:flex; gap:3px; }
-    .comment-rating-pick i{ font-size:16px; cursor:pointer; color:#d1d5db; transition:color .1s; }
-    .comment-rating-pick i.lit{ color:#111827; }
-    .comment-submit-btn{
-      padding:7px 16px; border-radius:999px; background:#111827; color:#fff;
-      border:none; font-size:12px; font-weight:700; cursor:pointer;
-      transition:background .2s;
-    }
-    .comment-submit-btn:hover{ background:#1f2937; }
-
-    @media(max-width:760px){
-      .viewer-sidebar{ display:none; }
-      .viewer-reader-inner{ padding:24px 20px; }
-      .viewer-reader-footer{ padding:16px 20px; }
-    }
-  
-    /* ── MOBILE HAMBURGER & DROPDOWN ── */
-    .hamburger-btn{
-      display:none;
-      width:36px; height:36px; border-radius:999px;
-      border:1px solid var(--line); background:#fff;
-      align-items:center; justify-content:center;
-      cursor:pointer; flex-shrink:0;
-      flex-direction:column; gap:5px; padding:0;
-    }
-    .hamburger-btn span{
-      display:block; width:16px; height:2px;
-      background:var(--text); border-radius:2px;
-      transition:transform .25s ease, opacity .25s ease;
-    }
-    .hamburger-btn.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-    .hamburger-btn.open span:nth-child(2){ opacity:0; }
-    .hamburger-btn.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
-    .mobile-nav-dropdown{
-      display:none;
-      position:absolute; top:calc(100% + 8px); right:0;
-      background:#fff; border:1px solid var(--line);
-      border-radius:16px; box-shadow:0 12px 32px rgba(17,24,39,.12);
-      padding:8px; z-index:500; min-width:200px;
-      flex-direction:column; gap:2px;
-    }
-    .mobile-nav-dropdown.open{ display:flex; }
-    .mobile-nav-dropdown a{
-      display:flex; align-items:center; gap:10px;
-      padding:10px 14px; border-radius:10px;
-      font-size:14px; font-weight:600; color:var(--text);
-      transition:background .15s;
-    }
-    .mobile-nav-dropdown a:hover{ background:#f9fafb; }
-    .mobile-nav-dropdown a i{ width:16px; text-align:center; color:var(--muted); font-size:13px; }
-    .mobile-nav-dropdown .dropdown-divider{
-      height:1px; background:var(--line); margin:4px 6px;
-    }
-    .mobile-nav-dropdown .dropdown-lib-link{
-      background:#111827; color:#fff !important; margin-top:2px;
-    }
-    .mobile-nav-dropdown .dropdown-lib-link:hover{ background:#1f2937; }
-    .mobile-nav-dropdown .dropdown-lib-link i{ color:rgba(255,255,255,.7) !important; }
-
-    @media (max-width: 980px){
-      .hamburger-btn{ display:flex; }
-      #topbar-right-main{ gap:6px; }
-    }
-</style>
+  </style>
 </head>
 
 <body>
   <div class="container">
     <!-- Header -->
     <header class="topbar">
-      <!-- Brand -->
-      <a class="brand" href="#" onclick="showMain(event)" id="brand-link">
-        <img src="siweni_converted.png" alt="Siweni logo">
+      <a class="brand" href="#">
+        <img src="siweni_converted.png" alt="Brand logo">
       </a>
 
-      <!-- Centre search (main site) -->
-      <div class="topbar-center" id="topbar-search-main">
-        <div class="topbar-search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Search services, resources…" aria-label="Site search">
-        </div>
-      </div>
-
-      <!-- Main site nav -->
-      <div class="nav-wrap" id="topbar-main-nav">
-        <nav id="primary-nav" class="nav" aria-label="Primary">
-          <a href="#about" class="main-nav-item">About</a>
-          <a href="#catalog" class="main-nav-item">Services</a>
-          <a href="#process" class="main-nav-item">How we work</a>
-          <a href="#contacts" class="main-nav-item">Contacts</a>
+      <div class="nav-wrap">
+       <nav id="primary-nav" class="nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#catalog">Services</a>
+          <a href="#process">How we work</a>
+          <a href="#library" class="nav-library-link"><i class="fa-solid fa-books" style="margin-right:5px;"></i>Library</a>
+          <a href="#contacts">Contacts</a>
         </nav>
       </div>
-
-      <!-- Right icons (main site) -->
-      <div class="topbar-right" id="topbar-right-main">
-        <a href="#library" class="nav-library-link" id="nav-lib-link" title="Open Library">
-          <i class="fa-solid fa-books" style="margin-right:5px;"></i>Library
-        </a>
-        <!-- Welcome (mobile only) -->
-        <span class="welcome mobile-welcome">Welcome to Siweni !</span>
-        <!-- Hamburger (mobile only) -->
-        <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileMenu()">
-          <span></span><span></span><span></span>
-        </button>
-        <!-- Mobile dropdown -->
-        <nav class="mobile-nav-dropdown" id="mobile-nav-dropdown" aria-label="Mobile navigation">
-          <a href="#about"   onclick="closeMobileMenu()"><i class="fa-regular fa-circle-info"></i> About</a>
-          <a href="#catalog" onclick="closeMobileMenu()"><i class="fa-solid fa-briefcase"></i> Services</a>
-          <a href="#process" onclick="closeMobileMenu()"><i class="fa-solid fa-gears"></i> How we work</a>
-          <a href="#contacts" onclick="closeMobileMenu()"><i class="fa-regular fa-envelope"></i> Contacts</a>
-          <div class="dropdown-divider"></div>
-          <a href="#library" class="dropdown-lib-link" id="nav-lib-link-mobile" onclick="closeMobileMenu()">
-            <i class="fa-solid fa-books"></i> Library
-          </a>
-        </nav>
-      </div>
-
-      <!-- Library topbar (shown only in library view) -->
-      <div id="topbar-lib-controls" style="display:none; flex:1; align-items:center; gap:10px; margin:0 16px;">
-        <div style="display:flex; flex-direction:column; gap:8px; flex:1; max-width:600px;">
-          <!-- Search row -->
-          <div class="topbar-search" style="flex:1;">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search library…" id="lib-search-input" oninput="libSearch(this.value)" aria-label="Library search">
-          </div>
-          <!-- Mobile filter tabs (hidden on desktop, shown on mobile) -->
-          <div class="lib-mobile-filters" id="lib-mobile-filters">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div class="lib-tabs lib-tabs-topbar lib-tabs-mobile" style="flex:1;">
-                <button class="lib-tab active" onclick="libTabAll(this,'all')">All</button>
-                <button class="lib-tab" onclick="libTabAll(this,'pdf')">PDF</button>
-                <button class="lib-tab" onclick="libTabAll(this,'word')">Word</button>
-                <button class="lib-tab" onclick="libTabAll(this,'pptx')">Slides</button>
-                <button class="lib-tab" onclick="libTabAll(this,'xlsx')">Sheets</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- Desktop tabs (hidden on mobile) -->
-        <div class="lib-tabs lib-tabs-topbar lib-tabs-desktop">
-          <button class="lib-tab active" onclick="libTabAll(this,'all')">All</button>
-          <button class="lib-tab" onclick="libTabAll(this,'pdf')">PDF</button>
-          <button class="lib-tab" onclick="libTabAll(this,'word')">Word</button>
-          <button class="lib-tab" onclick="libTabAll(this,'pptx')">Slides</button>
-          <button class="lib-tab" onclick="libTabAll(this,'xlsx')">Sheets</button>
-          <button class="lib-tab" onclick="libTabAll(this,'tool')">Tool</button>
-        </div>
-      </div>
-
-      <!-- Library right controls -->
-      <div id="topbar-lib-right" style="display:none; align-items:center; gap:8px;">
-        <button class="lib-upload-btn" onclick="openUploadModal()" style="margin:0;">
-          <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload
-        </button>
-        <button class="nav-back-btn" onclick="showMain(event)">
-          <i class="fa-solid fa-arrow-left"></i> Back to site
-        </button>
-      </div>
+      <div class="welcome" aria-live="polite">Welcome to Our Platform !</div>
     </header>
 
-    <!-- ══ MAIN SITE CONTENT ══ -->
-    <div id="main-site">
     <!-- Hero -->
     <section class="hero" aria-label="Hero">
       <div class="hero-inner" data-reveal>
@@ -1281,10 +687,9 @@
                 <p class="card-sub">Growth campaigns and content</p>
               </div>
             </article>
-
-          </div><!-- /cards -->
-        </div><!-- /right col -->
-      </div><!-- /catalog grid -->
+            
+        </div>
+      </div>
     </section>
 
     <!-- How we work -->
@@ -1345,32 +750,38 @@
       </div>
     </section>
 
-    </div><!-- /main-site -->
+    <div class="hr" aria-hidden="true"></div>
 
-    <!-- ══ LIBRARY VIEW ══ -->
-    <div id="lib-view" style="display:none;">
+    <!-- ══ LIBRARY ══ -->
+    <section id="library" class="section">
+      <h2 data-reveal><i class="fa-solid fa-books" style="color:var(--brand); margin-right:10px;"></i>Library</h2>
+      <p class="lib-lead" data-reveal>Browse, search, and download all uploaded documents and resources.</p>
 
-      <!-- Hero Banner -->
-      <div class="lib-hero">
-        <div class="lib-hero-text">
-          <h2><i class="fa-solid fa-books" style="margin-right:10px;opacity:.7;"></i>Document Library</h2>
-          <p>Browse, filter and download all uploaded documents and resources.</p>
+      <!-- Toolbar -->
+      <div class="lib-toolbar" data-reveal>
+        <div class="lib-tabs">
+          <button class="lib-tab active" onclick="libTab(this,'all')">All</button>
+          <button class="lib-tab" onclick="libTab(this,'pdf')">PDFs</button>
+          <button class="lib-tab" onclick="libTab(this,'word')">Word</button>
+          <button class="lib-tab" onclick="libTab(this,'pptx')">Slides</button>
+          <button class="lib-tab" onclick="libTab(this,'xlsx')">Sheets</button>
         </div>
-        <div class="lib-hero-stats">
-          <div class="lib-hero-stat"><b>54</b><span>Documents</span></div>
-          <div class="lib-hero-stat"><b>8</b><span>Categories</span></div>
-          <div class="lib-hero-stat"><b>4</b><span>File types</span></div>
+        <div class="lib-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search documents…" id="lib-search-input" oninput="libSearch(this.value)">
         </div>
+        <label class="lib-upload-btn" for="lib-file-input">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload
+          <input type="file" id="lib-file-input" multiple style="display:none" onchange="libHandleUpload(this)">
+        </label>
       </div>
 
-      <!-- Layout: sidebar + grid -->
       <div class="lib-layout">
-
-        <!-- ── LEFT SIDEBAR ── -->
-        <aside class="lib-sidebar">
+        <!-- Sidebar Filters -->
+        <aside class="lib-sidebar" data-reveal>
           <p class="lib-sidebar-title">Filter Options</p>
 
-          <div class="lib-filter-group" data-group="category">
+          <div class="lib-filter-group">
             <span class="lib-filter-label">Category</span>
             <label class="lib-filter-item"><input type="checkbox" checked> Reports <span class="lib-filter-count">12</span></label>
             <label class="lib-filter-item"><input type="checkbox" checked> Proposals <span class="lib-filter-count">8</span></label>
@@ -1380,9 +791,7 @@
             <label class="lib-filter-item"><input type="checkbox"> Research <span class="lib-filter-count">9</span></label>
           </div>
 
-          <div class="lib-sidebar-divider"></div>
-
-          <div class="lib-filter-group" data-group="filetype">
+          <div class="lib-filter-group">
             <span class="lib-filter-label">File Type</span>
             <label class="lib-filter-item"><input type="checkbox" checked> PDF <span class="lib-filter-count">22</span></label>
             <label class="lib-filter-item"><input type="checkbox"> Word (.docx) <span class="lib-filter-count">14</span></label>
@@ -1390,66 +799,193 @@
             <label class="lib-filter-item"><input type="checkbox"> Excel <span class="lib-filter-count">6</span></label>
           </div>
 
-          <div class="lib-sidebar-divider"></div>
-
-          <div class="lib-filter-group" data-group="year">
+          <div class="lib-filter-group">
             <span class="lib-filter-label">Year</span>
             <label class="lib-filter-item"><input type="checkbox" checked> 2025 <span class="lib-filter-count">18</span></label>
             <label class="lib-filter-item"><input type="checkbox" checked> 2024 <span class="lib-filter-count">24</span></label>
             <label class="lib-filter-item"><input type="checkbox"> 2023 <span class="lib-filter-count">8</span></label>
           </div>
 
-          <button class="lib-refine-btn"><i class="fa-solid fa-sliders"></i>&nbsp; Refine Search</button>
-          <span class="lib-reset-link" onclick="resetFilters()">Reset all filters</span>
+          <button class="lib-refine-btn"><i class="fa-solid fa-sliders"></i> Refine Search</button>
+          <p style="text-align:center; margin:8px 0 0; font-size:12px; color:var(--muted); cursor:pointer;">Reset Filter</p>
         </aside>
 
-        <!-- ── RIGHT: Grid + Pagination + Upload ── -->
+        <!-- Document Grid -->
         <div>
           <div class="lib-grid" id="lib-grid">
 
-            <div class="doc-card" data-type="pdf" data-title="Q4 Annual Report 2024" data-category="report" data-year="2025" data-reveal-lib>
-              <div class="doc-cover doc-cover-pdf" style="background-image:url('https://images.unsplash.com/photo-1568667256549-094345857afc?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-pdf doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">PDF</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Report</p><p class="doc-title">Q4 Annual Report 2024</p><p class="doc-meta">Finance &middot; Jan 2025 &middot; 2.4 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 1 -->
+            <div class="doc-card" data-type="pdf" data-title="Q4 Annual Report 2024">
+              <div class="doc-cover doc-cover-pdf">
+                <i class="fa-solid fa-file-pdf doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">PDF</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Report</p>
+                <p class="doc-title">Q4 Annual Report 2024</p>
+                <p class="doc-meta">Finance · Jan 2025 · 2.4 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="pptx" data-title="Brand Strategy Deck" data-category="presentation" data-year="2025" data-reveal-lib>
-              <div class="doc-cover doc-cover-pptx" style="background-image:url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-powerpoint doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">PPTX</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Presentation</p><p class="doc-title">Brand Strategy Deck</p><p class="doc-meta">Marketing &middot; Mar 2025 &middot; 5.1 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 2 -->
+            <div class="doc-card" data-type="pptx" data-title="Brand Strategy Deck">
+              <div class="doc-cover doc-cover-pptx">
+                <i class="fa-solid fa-file-powerpoint doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">PPTX</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Presentation</p>
+                <p class="doc-title">Brand Strategy Deck</p>
+                <p class="doc-meta">Marketing · Mar 2025 · 5.1 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="word" data-title="Service Proposal Template" data-category="template" data-year="2025" data-reveal-lib>
-              <div class="doc-cover doc-cover-word" style="background-image:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-word doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">DOCX</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Template</p><p class="doc-title">Service Proposal Template</p><p class="doc-meta">General &middot; Feb 2025 &middot; 0.9 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 3 -->
+            <div class="doc-card" data-type="word" data-title="Service Proposal Template">
+              <div class="doc-cover doc-cover-word">
+                <i class="fa-solid fa-file-word doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">DOCX</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Template</p>
+                <p class="doc-title">Service Proposal Template</p>
+                <p class="doc-meta">General · Feb 2025 · 0.9 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="xlsx" data-title="Budget Tracker 2025" data-category="spreadsheet" data-year="2025" data-reveal-lib>
-              <div class="doc-cover doc-cover-xlsx" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-excel doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">XLSX</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Spreadsheet</p><p class="doc-title">Budget Tracker 2025</p><p class="doc-meta">Finance &middot; Jan 2025 &middot; 1.2 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 4 -->
+            <div class="doc-card" data-type="xlsx" data-title="Budget Tracker 2025">
+              <div class="doc-cover doc-cover-xlsx">
+                <i class="fa-solid fa-file-excel doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">XLSX</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Spreadsheet</p>
+                <p class="doc-title">Budget Tracker 2025</p>
+                <p class="doc-meta">Finance · Jan 2025 · 1.2 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="pdf" data-title="Cybersecurity Policy Guide" data-category="guide" data-year="2024" data-reveal-lib>
-              <div class="doc-cover doc-cover-pdf" style="background-image:url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-pdf doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">PDF</span><button class="doc-wishlist"><i class="fa-solid fa-bookmark" style="color:#fff;"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Guide</p><p class="doc-title">Cybersecurity Policy Guide</p><p class="doc-meta">Security &middot; Dec 2024 &middot; 3.7 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 5 -->
+            <div class="doc-card" data-type="pdf" data-title="Cybersecurity Policy Guide">
+              <div class="doc-cover doc-cover-pdf">
+                <i class="fa-solid fa-file-pdf doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">PDF</span>
+                <button class="doc-wishlist"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Guide</p>
+                <p class="doc-title">Cybersecurity Policy Guide</p>
+                <p class="doc-meta">Security · Dec 2024 · 3.7 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="pptx" data-title="Data Analytics Overview" data-category="presentation" data-year="2024" data-reveal-lib>
-              <div class="doc-cover doc-cover-pptx" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-powerpoint doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">PPTX</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Presentation</p><p class="doc-title">Data Analytics Overview</p><p class="doc-meta">Data Science &middot; Nov 2024 &middot; 4.3 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 6 -->
+            <div class="doc-card" data-type="pptx" data-title="Data Analytics Overview">
+              <div class="doc-cover doc-cover-pptx">
+                <i class="fa-solid fa-file-powerpoint doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">PPTX</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Presentation</p>
+                <p class="doc-title">Data Analytics Overview</p>
+                <p class="doc-meta">Data Science · Nov 2024 · 4.3 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="word" data-title="Client Onboarding Checklist" data-category="checklist" data-year="2024" data-reveal-lib>
-              <div class="doc-cover doc-cover-word" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-file-word doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">DOCX</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Checklist</p><p class="doc-title">Client Onboarding Checklist</p><p class="doc-meta">Operations &middot; Oct 2024 &middot; 0.5 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 7 -->
+            <div class="doc-card" data-type="word" data-title="Client Onboarding Checklist">
+              <div class="doc-cover doc-cover-word">
+                <i class="fa-solid fa-file-word doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">DOCX</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Checklist</p>
+                <p class="doc-title">Client Onboarding Checklist</p>
+                <p class="doc-meta">Operations · Oct 2024 · 0.5 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
-            <div class="doc-card" data-type="pdf" data-title="Software Dev Roadmap" data-category="roadmap" data-year="2024" data-reveal-lib>
-              <div class="doc-cover doc-cover-generic" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80'); background-size:cover; background-position:center;"><i class="fa-solid fa-map doc-cover-icon" style="display:none;"></i><span class="doc-cover-badge">PDF</span><button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button></div>
-              <div class="doc-body"><p class="doc-type">Roadmap</p><p class="doc-title">Software Dev Roadmap</p><p class="doc-meta">Engineering &middot; Sep 2024 &middot; 1.8 MB</p><div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><div class="doc-actions"><button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button><button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button></div></div>
+            <!-- Card 8 -->
+            <div class="doc-card" data-type="pdf" data-title="Software Dev Roadmap">
+              <div class="doc-cover doc-cover-generic">
+                <i class="fa-solid fa-map doc-cover-icon" style="color:#fff;"></i>
+                <span class="doc-cover-badge">PDF</span>
+                <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <div class="doc-body">
+                <p class="doc-type">Roadmap</p>
+                <p class="doc-title">Software Dev Roadmap</p>
+                <p class="doc-meta">Engineering · Sep 2024 · 1.8 MB</p>
+                <div class="doc-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="doc-actions">
+                  <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                  <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+              </div>
             </div>
 
           </div><!-- /lib-grid -->
 
-          <div class="lib-pagination" data-reveal-lib>
+          <!-- Pagination -->
+          <div class="lib-pagination" data-reveal>
             <span id="lib-count">Showing 8 from 54 documents</span>
             <div class="lib-pages">
               <button class="lib-page-btn arrow"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1460,12 +996,17 @@
             </div>
           </div>
 
+          <!-- Upload Drop Zone -->
+          <label class="lib-upload-zone" for="lib-file-input" data-reveal>
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <p><strong>Drag & drop files here</strong> or click to browse</p>
+            <p style="margin-top:6px; font-size:12px;">Supports PDF, DOCX, PPTX, XLSX · Max 50MB per file</p>
+          </label>
 
-
-        </div><!-- /grid wrapper -->
+        </div><!-- /doc grid wrapper -->
       </div><!-- /lib-layout -->
-    </div>
-    <!-- ══ END LIBRARY VIEW ══ -->
+    </section>
+    <!-- ══ END LIBRARY ══ -->
 
     <section id="contacts" class="section">
       <h2 data-reveal>Contacts</h2>
@@ -1494,1377 +1035,121 @@
   </div>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    /* ── VIEW SWITCHING ── */
-    const mainSite  = document.getElementById('main-site');
-    const libView   = document.getElementById('lib-view');
+    /* ── NEON TECH DATABASE CONFIGURATION ── */
+    const NEON_CONFIG = {
+      connectionString: 'postgres://admin:your-password@ep-shiny-lake-654321.eu-central-1.aws.neon.tech/siweni_db',
+      apiKey: 'your-neon-api-key-here' // Use environment variables in production
+    };
 
-    function showLibrary(e) {
-      if(e) e.preventDefault();
-      mainSite.style.display = 'none';
-      libView.style.display  = 'block';
-      // topbar: hide main controls, show lib controls
-      document.getElementById('topbar-main-nav').style.display    = 'none';
-      document.getElementById('topbar-right-main').style.display  = 'none';
-      document.getElementById('topbar-search-main').style.display = 'none';
-      document.getElementById('topbar-lib-controls').style.display = 'flex';
-      document.getElementById('topbar-lib-right').style.display    = 'flex';
-      document.title = 'Library — Siweni Innovative Solutions';
-      window.scrollTo({top:0, behavior:'smooth'});
-      history.pushState({view:'library'}, '', '#library');
-      /* Immediately make all lib elements visible so clicks always work */
-      document.querySelectorAll('[data-reveal-lib]').forEach(el => el.classList.add('inview'));
+    async function queryNeon(sql, params = []) {
+      console.log('[Neon] Executing query:', sql);
+      try {
+        const response = await fetch('https://api.neon.tech/v1/projects/ep-shiny-lake-654321/endpoints/ep-shiny-lake-654321/query', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${NEON_CONFIG.apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query: sql, params })
+        });
+        return await response.json();
+      } catch (error) {
+        console.error('[Neon] Query error:', error);
+        return null;
+      }
     }
 
-    function showMain(e) {
-      if(e) e.preventDefault();
-      libView.style.display  = 'none';
-      mainSite.style.display = 'block';
-      // topbar: show main controls, hide lib controls
-      document.getElementById('topbar-main-nav').style.display    = '';
-      document.getElementById('topbar-right-main').style.display  = '';
-      document.getElementById('topbar-search-main').style.display = '';
-      document.getElementById('topbar-lib-controls').style.display = 'none';
-      document.getElementById('topbar-lib-right').style.display    = 'none';
-      const wel = document.querySelector('.welcome'); if(wel) wel.style.display = '';
-      document.title = 'Siweni Innovative Solutions — IT, Software, Data, Marketing, Cyber Security';
-      /* Force all main site reveals visible */
-      document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('inview'));
-      window.scrollTo({top:0, behavior:'smooth'});
-      history.pushState({view:'main'}, '', '#');
-    }
-
-    /* Nav Library link click */
-    document.getElementById('nav-lib-link').addEventListener('click', showLibrary);
-
-    /* Browser back/forward */
-    window.addEventListener('popstate', e => {
-      if(window.location.hash === '#library') showLibrary(null);
-      else showMain(null);
-    });
-
-    /* Load correct view on initial page load */
-    if(window.location.hash === '#library') showLibrary(null);
-    else {
-      /* Trigger reveal animations for main site on initial load */
-      const mainIo = new IntersectionObserver(entries => {
-        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('inview'); mainIo.unobserve(e.target); } });
-      }, {threshold:.05});
-      document.querySelectorAll('[data-reveal]').forEach(el => mainIo.observe(el));
-    }
-
-    /* ── LIBRARY FUNCTIONS ── */
-
-    /* ─ Tabs ─ */
+    /* ── LIBRARY JS ── */
     function libTab(btn, type){
       document.querySelectorAll('.lib-tab').forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
-      applyFilters();
-    }
-    function libTabAll(btn, type){
-      document.querySelectorAll('.lib-tab').forEach(t => {
-        const oc = t.getAttribute('onclick') || '';
-        t.classList.toggle('active', oc.includes("'"+type+"'"));
-      });
-      applyFilters();
-    }
-
-    /* ─ Search ─ */
-    function libSearch(q){ applyFilters(); }
-
-    /* ─ Master filter engine ─ */
-    function applyFilters(){
-      const q = (document.getElementById('lib-search-input')?.value || '').toLowerCase().trim();
-
-      /* Active tab type */
-      let activeType = 'all';
-      document.querySelectorAll('.lib-tabs-desktop .lib-tab').forEach(t => {
-        if(t.classList.contains('active')){
-          const oc = t.getAttribute('onclick') || '';
-          const m = oc.match(/'([^']+)'/);
-          if(m) activeType = m[1];
-        }
-      });
-
-      /* Checked categories — desktop sidebar + mobile drawer */
-      const catChecked = [];
-      document.querySelectorAll('[data-group="category"] .lib-filter-item input:checked').forEach(cb => {
-        catChecked.push(cb.closest('.lib-filter-item').textContent.trim().replace(/\d+/g,'').toLowerCase().trim());
-      });
-      mobActiveCats.forEach(c => { if(!catChecked.includes(c)) catChecked.push(c); });
-
-      /* Checked file types — desktop sidebar + mobile drawer */
-      const typeChecked = [];
-      const typeMap2 = {'pdf':'pdf','word (.docx)':'word','powerpoint':'pptx','excel':'xlsx'};
-      document.querySelectorAll('[data-group="filetype"] .lib-filter-item input:checked').forEach(cb => {
-        const label = cb.closest('.lib-filter-item').textContent.trim().replace(/\d+/g,'').toLowerCase().trim();
-        if(typeMap2[label]) typeChecked.push(typeMap2[label]);
-      });
-      mobActiveFtypes.forEach(t => { if(!typeChecked.includes(t)) typeChecked.push(t); });
-
-      /* Checked years — desktop sidebar + mobile drawer */
-      const yearChecked = [];
-      document.querySelectorAll('[data-group="year"] .lib-filter-item input:checked').forEach(cb => {
-        yearChecked.push(cb.closest('.lib-filter-item').textContent.trim().replace(/\D/g,'').trim());
-      });
-      mobActiveYears.forEach(y => { if(!yearChecked.includes(y)) yearChecked.push(y); });
-
       document.querySelectorAll('#lib-grid .doc-card').forEach(card => {
-        const title   = (card.dataset.title || '').toLowerCase();
-        const docType = card.dataset.type || '';
-        const docYear = card.dataset.year || '';
-        const docCat  = (card.dataset.category || '').toLowerCase();
-
-        /* Tab filter */
-        if(activeType !== 'all' && docType !== activeType){ card.style.display='none'; return; }
-
-        /* Search filter */
-        if(q && !title.includes(q)){ card.style.display='none'; return; }
-
-        /* File type sidebar filter (only if any checked) */
-        if(typeChecked.length > 0 && !typeChecked.includes(docType)){ card.style.display='none'; return; }
-
-        /* Year filter (only if any checked) */
-        if(yearChecked.length > 0 && docYear && !yearChecked.includes(docYear)){ card.style.display='none'; return; }
-
-        card.style.display = '';
+        const match = type === 'all' || card.dataset.type === type;
+        card.style.display = match ? '' : 'none';
       });
-
       updateLibCount();
     }
-
-    /* Wire up sidebar filter checkboxes to live-filter on change */
-    document.querySelectorAll('.lib-sidebar .lib-filter-item input[type=checkbox]').forEach(cb => {
-      cb.addEventListener('change', applyFilters);
-    });
-
-    /* Refine Search button just runs the filter (already live, but satisfies the click) */
-    document.querySelector('.lib-refine-btn')?.addEventListener('click', applyFilters);
-
-    /* ─ Count ─ */
+    function libSearch(q){
+      const query = q.toLowerCase();
+      document.querySelectorAll('#lib-grid .doc-card').forEach(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        card.style.display = title.includes(query) ? '' : 'none';
+      });
+      updateLibCount();
+    }
     function updateLibCount(){
       const visible = document.querySelectorAll('#lib-grid .doc-card:not([style*="none"])').length;
       const el = document.getElementById('lib-count');
       if(el) el.textContent = `Showing ${visible} from 54 documents`;
     }
-
-    /* ─ Reset ─ */
-    function resetFilters(){
-      document.querySelectorAll('.lib-sidebar .lib-filter-item input').forEach(cb => cb.checked = false);
-      clearMobFilters();
-      document.querySelectorAll('.lib-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.lib-tab').forEach(t => {
-        if((t.getAttribute('onclick')||'').includes("'all'")) t.classList.add('active');
-      });
-      if(document.getElementById('lib-search-input')) document.getElementById('lib-search-input').value = '';
-      document.querySelectorAll('#lib-grid .doc-card').forEach(c => c.style.display = '');
-      updateLibCount();
-    }
-
-    /* ═══════════════════════════════════════
-       UPLOAD MODAL
-    ═══════════════════════════════════════ */
-    let modalStep = 1;
-    let selectedFile = null;
-    let coverOption = 'first';
-    let coverDataUrl = null;
-
-    function openUploadModal(){
-      modalStep = 1; selectedFile = null; coverOption = 'first'; coverDataUrl = null;
-      renderModalStep();
-      document.getElementById('upload-modal-backdrop').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeUploadModal(){
-      document.getElementById('upload-modal-backdrop').classList.remove('open');
-      document.body.style.overflow = '';
-      resetModalForm();
-    }
-    function handleBackdropClick(e){
-      if(e.target === document.getElementById('upload-modal-backdrop')) closeUploadModal();
-    }
-    function resetModalForm(){
-      document.getElementById('modal-file-input').value = '';
-      document.getElementById('modal-cover-input').value = '';
-      document.getElementById('upload-file-name').classList.remove('visible');
-      document.getElementById('cover-preview-wrap').classList.remove('visible');
-      document.getElementById('upload-progress').classList.remove('visible');
-      document.getElementById('doc-title-input').value = '';
-      document.getElementById('doc-comment-input').value = '';
-      document.getElementById('doc-category-input').selectedIndex = 0;
-      selectCoverOption('first');
-    }
-
-    function renderModalStep(){
-      [1,2,3].forEach(n => {
-        document.getElementById('upload-step-'+n).style.display = n===modalStep ? '' : 'none';
-      });
-      /* Step dots */
-      [1,2,3].forEach(n => {
-        const dot = document.getElementById('step-dot-'+n);
-        dot.classList.toggle('done',   n < modalStep);
-        dot.classList.toggle('active', n === modalStep);
-        if(n < modalStep) dot.innerHTML = '<i class="fa-solid fa-check" style="font-size:10px;"></i>';
-        else dot.textContent = n;
-      });
-      [1,2].forEach(n => {
-        document.getElementById('step-line-'+n)?.classList.toggle('done', n < modalStep);
-      });
-      /* Back button */
-      document.getElementById('modal-btn-back').style.display = modalStep > 1 ? '' : 'none';
-      /* Next/Submit button */
-      const nextBtn = document.getElementById('modal-btn-next');
-      nextBtn.disabled = (modalStep === 1 && !selectedFile);
-      nextBtn.innerHTML = modalStep === 3
-        ? '<i class="fa-solid fa-check"></i> Add to Library'
-        : 'Next <i class="fa-solid fa-arrow-right"></i>';
-    }
-
-    function modalStepNext(){
-      if(modalStep === 1 && !selectedFile) return;
-      if(modalStep === 3){ submitUpload(); return; }
-      modalStep++;
-      /* Pre-fill title from filename on step 3 */
-      if(modalStep === 3 && selectedFile){
-        const titleInput = document.getElementById('doc-title-input');
-        if(!titleInput.value) titleInput.value = selectedFile.name.replace(/\.[^.]+$/,'');
-      }
-      renderModalStep();
-    }
-    function modalStepBack(){
-      if(modalStep > 1){ modalStep--; renderModalStep(); }
-    }
-
-    /* ─ File selection ─ */
-    function handleModalFileSelect(input){
-      if(input.files[0]) setSelectedFile(input.files[0]);
-    }
-    function handleModalDragOver(e){
-      e.preventDefault();
-      document.getElementById('modal-drop-area').classList.add('dragover');
-    }
-    function handleModalDragLeave(e){
-      document.getElementById('modal-drop-area').classList.remove('dragover');
-    }
-    function handleModalDrop(e){
-      e.preventDefault();
-      document.getElementById('modal-drop-area').classList.remove('dragover');
-      const f = e.dataTransfer.files[0];
-      if(f) setSelectedFile(f);
-    }
-    function setSelectedFile(f){
-      selectedFile = f;
-      const iconMap = {pdf:'fa-file-pdf',docx:'fa-file-word',doc:'fa-file-word',pptx:'fa-file-powerpoint',ppt:'fa-file-powerpoint',xlsx:'fa-file-excel',xls:'fa-file-excel'};
-      const ext = f.name.split('.').pop().toLowerCase();
-      document.getElementById('upload-file-icon').className = 'fa-solid '+(iconMap[ext]||'fa-file');
-      document.getElementById('upload-file-label').textContent = f.name;
-      document.getElementById('upload-file-size').textContent = (f.size/(1024*1024)).toFixed(1)+' MB';
-      document.getElementById('upload-file-name').classList.add('visible');
-      renderModalStep();
-    }
-
-    /* ─ Cover options ─ */
-    function selectCoverOption(opt){
-      coverOption = opt;
-      ['first','upload','none'].forEach(o => {
-        document.getElementById('cover-opt-'+o)?.classList.toggle('selected', o===opt);
-      });
-      document.getElementById('cover-upload-area').style.display  = opt==='upload' ? '' : 'none';
-      document.getElementById('first-page-notice').style.display  = opt==='first'  ? '' : 'none';
-      if(opt !== 'upload'){ coverDataUrl=null; document.getElementById('cover-preview-wrap').classList.remove('visible'); }
-    }
-    function handleCoverSelect(input){
-      const f = input.files[0]; if(!f) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        coverDataUrl = ev.target.result;
-        document.getElementById('cover-preview-img').src = coverDataUrl;
-        document.getElementById('cover-preview-wrap').classList.add('visible');
-      };
-      reader.readAsDataURL(f);
-    }
-    function removeCover(){
-      coverDataUrl = null;
-      document.getElementById('cover-preview-wrap').classList.remove('visible');
-      document.getElementById('modal-cover-input').value = '';
-    }
-
-    /* ─ Submit / add card to grid ─ */
-    function submitUpload(){
-      const prog = document.getElementById('upload-progress');
-      const fill = document.getElementById('upload-progress-fill');
-      const label = document.getElementById('upload-progress-label');
-      prog.classList.add('visible');
-      document.getElementById('modal-btn-next').disabled = true;
-
-      /* Simulate upload progress */
-      let pct = 0;
-      const msgs = ['Uploading file…','Processing document…','Generating preview…','Adding to library…'];
-      const iv = setInterval(()=>{
-        pct += Math.random()*22+8;
-        if(pct > 100) pct = 100;
-        fill.style.width = pct+'%';
-        label.textContent = msgs[Math.min(Math.floor(pct/26), msgs.length-1)];
-        if(pct >= 100){
-          clearInterval(iv);
-          label.textContent = 'Done!';
-          setTimeout(()=>{ addCardToGrid(); closeUploadModal(); }, 400);
-        }
-      }, 250);
-    }
-
-    function addCardToGrid(){
-      if(!selectedFile) return;
-      const ext = selectedFile.name.split('.').pop().toLowerCase();
-      const typeMap  = {pdf:'pdf',docx:'word',doc:'word',pptx:'pptx',ppt:'pptx',xlsx:'xlsx',xls:'xlsx'};
-      const coverMap = {pdf:'doc-cover-pdf',word:'doc-cover-word',pptx:'doc-cover-pptx',xlsx:'doc-cover-xlsx'};
-      const iconMap  = {pdf:'fa-file-pdf',word:'fa-file-word',pptx:'fa-file-powerpoint',xlsx:'fa-file-excel'};
-      const labelMap = {pdf:'PDF',word:'DOCX',pptx:'PPTX',xlsx:'XLSX'};
-      const t        = typeMap[ext] || 'generic';
-      const size     = (selectedFile.size/(1024*1024)).toFixed(1)+' MB';
-      const titleVal = document.getElementById('doc-title-input').value.trim() || selectedFile.name.replace(/\.[^.]+$/,'');
-      const category = document.getElementById('doc-category-input').value;
-      const comment  = document.getElementById('doc-comment-input').value.trim();
-
-      /* Persistent blob URL for Preview/Download */
-      const blobUrl = URL.createObjectURL(selectedFile);
-      const now = new Date();
-      const dateStr = now.toLocaleString('default',{month:'short'})+' '+now.getFullYear();
-      const metaStr = category+' \u00b7 '+dateStr+' \u00b7 '+size;
-
-      const coverStyle = coverDataUrl
-        ? "background-image:url('"+coverDataUrl+"'); background-size:cover; background-position:center;"
-        : '';
-      const iconHtml = coverDataUrl ? '' : '<i class="fa-solid '+(iconMap[t]||'fa-file')+' doc-cover-icon"></i>';
-
-      const card = document.createElement('div');
-      card.className = 'doc-card inview';
-      card.dataset.type     = t;
-      card.dataset.title    = titleVal;
-      card.dataset.year     = String(now.getFullYear());
-      card.dataset.category = category.toLowerCase();
-      card.dataset.fileUrl  = blobUrl;
-      card.dataset.fileExt  = ext;
-      card.dataset.meta     = metaStr;
-
-      card.innerHTML =
-        '<div class="doc-cover '+(coverMap[t]||'doc-cover-generic')+'" style="'+coverStyle+'">'+
-          iconHtml+
-          '<span class="doc-cover-badge">'+(labelMap[t]||ext.toUpperCase())+'</span>'+
-          '<button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>'+
-        '</div>'+
-        '<div class="doc-body">'+
-          '<p class="doc-type">'+category+'</p>'+
-          '<p class="doc-title">'+titleVal+'</p>'+
-          '<p class="doc-meta">'+dateStr+' \u00b7 '+size+'</p>'+
-          (comment ? '<p style="font-size:11px;color:#6b7280;margin:0 0 6px;font-style:italic;">'+comment+'</p>' : '')+
-          '<div class="doc-stars"><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i></div>'+
-          '<div class="doc-actions">'+
-            '<button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>'+
-            '<button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>'+
-          '</div>'+
-        '</div>';
-
-      document.getElementById('lib-grid').insertBefore(card, document.getElementById('lib-grid').firstChild);
-      updateLibCount();
-
-      /* Persist upload to localStorage as base64 */
-      const reader2 = new FileReader();
-      reader2.onload = ev => {
-        const uploads = loadUploads();
-        uploads.unshift({
-          title: titleVal, type: t, ext: ext, size: size,
-          category: category, comment: comment,
-          dateStr: dateStr, metaStr: metaStr,
-          coverDataUrl: coverDataUrl || null,
-          fileBase64: ev.target.result
-        });
-        saveUploads(uploads);
-      };
-      reader2.readAsDataURL(selectedFile);
-    }
-
-    /* Topbar upload button uses onclick="openUploadModal()" directly */
-
-    /* Drag onto the full upload zone */
-    document.querySelectorAll('.lib-upload-zone').forEach(zone => {
-      zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor='#111827'; });
-      zone.addEventListener('dragleave', () => { zone.style.borderColor=''; });
-      zone.addEventListener('drop', e => {
-        e.preventDefault(); zone.style.borderColor='';
-        const f = e.dataTransfer.files[0];
-        if(f){ openUploadModal(); setTimeout(()=>setSelectedFile(f), 100); }
-      });
-    });
-
-    /* Bookmark toggle */
-    document.addEventListener('click', e => {
-      const btn = e.target.closest('.doc-wishlist');
-      if(!btn) return;
-      const icon = btn.querySelector('i');
-      if(icon.classList.contains('fa-regular')){
-        icon.classList.replace('fa-regular','fa-solid');
-        icon.style.color = '#111827';
-      } else {
-        icon.classList.replace('fa-solid','fa-regular');
-        icon.style.color = '';
-      }
-    });
-
-
-
-    /* ════════════════════════════════════════
-       DOCUMENT VIEWER
-    ════════════════════════════════════════ */
-
-    /* ── PERSISTENT STORAGE HELPERS ── */
-    const LS_STATE_KEY   = 'siweni_doc_state';
-    const LS_UPLOADS_KEY = 'siweni_uploads';
-    function loadAllState(){ try{ return JSON.parse(localStorage.getItem(LS_STATE_KEY)||'{}'); }catch(e){ return {}; } }
-    function saveAllState(obj){ try{ localStorage.setItem(LS_STATE_KEY, JSON.stringify(obj)); }catch(e){} }
-    function loadUploads(){ try{ return JSON.parse(localStorage.getItem(LS_UPLOADS_KEY)||'[]'); }catch(e){ return []; } }
-    function saveUploads(arr){ try{ localStorage.setItem(LS_UPLOADS_KEY, JSON.stringify(arr)); }catch(e){} }
-
-    /* Per-document state store — backed by localStorage */
-    const DOC_STATE = loadAllState();
-    function getDocState(title){
-      if(!DOC_STATE[title]) DOC_STATE[title] = {ratings:[4,5], comments:[], userRating:0, ratingBreakdown:{1:0,2:0,3:0,4:1,5:1}};
-      return DOC_STATE[title];
-    }
-    function persistDocState(){ saveAllState(DOC_STATE); }
-
-    /* Demo document content keyed by title */
-    const DEMO_DOCS = {
-      'Q4 Annual Report 2024': {
-        type: 'pdf', meta: 'Finance · Jan 2025 · 2.4 MB',
-        html: `
-          <h1>Q4 Annual Report 2024</h1>
-          <p class="doc-byline">Siweni Innovative Solutions &nbsp;·&nbsp; Finance Department &nbsp;·&nbsp; January 2025</p>
-          <div class="metric-row">
-            <div class="metric"><b>$2.4M</b><span>Total Revenue</span></div>
-            <div class="metric"><b>38%</b><span>YoY Growth</span></div>
-            <div class="metric"><b>$620K</b><span>Net Profit</span></div>
-          </div>
-          <h2>Executive Summary</h2>
-          <p>Siweni Innovative Solutions closed Q4 2024 with record revenue of $2.4 million, representing a 38% increase year-on-year. The quarter was driven by strong demand across our Software Design and Data Science service lines, with new client acquisitions in the financial services and healthcare sectors.</p>
-          <p>Operating costs remained well-controlled, with the efficiency ratio improving to 74.2% from 79.1% in Q4 2023. The team grew from 18 to 27 full-time employees, with key hires in product engineering and cybersecurity consulting.</p>
-          <div class="callout"><strong>Highlight:</strong> Our Data Science & Analytics practice achieved 100% client renewal rate in Q4, contributing $810K in recurring revenue.</div>
-          <h2>Revenue Breakdown by Service</h2>
-          <table>
-            <tr><th>Service Line</th><th>Q4 2024</th><th>Q4 2023</th><th>Growth</th></tr>
-            <tr><td>Software Design & Dev</td><td>$890,000</td><td>$620,000</td><td>+44%</td></tr>
-            <tr><td>Data Science & Analytics</td><td>$810,000</td><td>$540,000</td><td>+50%</td></tr>
-            <tr><td>Digital Marketing & SEO</td><td>$390,000</td><td>$310,000</td><td>+26%</td></tr>
-            <tr><td>Cybersecurity Consulting</td><td>$310,000</td><td>$270,000</td><td>+15%</td></tr>
-          </table>
-          <h2>Operational Highlights</h2>
-          <ul>
-            <li>Delivered 18 client projects in Q4, with an average satisfaction score of 4.7/5.0</li>
-            <li>Launched our internal AI-assisted code review platform, reducing delivery time by 22%</li>
-            <li>Expanded cybersecurity practice with Cisco partnership certification</li>
-            <li>Opened new client engagements in Zambia, Botswana, and Mozambique</li>
-          </ul>
-          <h2>Q1 2025 Outlook</h2>
-          <p>Management targets Q1 2025 revenue of $2.7–2.9 million, supported by a strong pipeline of five pending contracts valued at $1.4M. Investment priorities include headcount growth (+4 engineers), cloud infrastructure upgrades, and expansion of the Data Science practice into predictive analytics for retail clients.</p>
-          <h3>Risk Factors</h3>
-          <ul>
-            <li>Currency volatility in regional markets</li>
-            <li>Competitive pressure in the digital marketing segment</li>
-            <li>Talent acquisition in a constrained engineering labour market</li>
-          </ul>`
-      },
-      'Brand Strategy Deck': {
-        type: 'pptx', meta: 'Marketing · Mar 2025 · 5.1 MB',
-        html: `
-          <h1>Brand Strategy Deck</h1>
-          <p class="doc-byline">Siweni Marketing &nbsp;·&nbsp; March 2025 &nbsp;·&nbsp; Confidential</p>
-          <h2>Brand Vision</h2>
-          <p>To be the most trusted technology partner for growth-stage businesses across Sub-Saharan Africa — recognised for our depth of expertise, speed of delivery, and commitment to long-term client outcomes.</p>
-          <div class="callout"><span class="tag">Tagline</span> <em>"Built for what's next."</em></div>
-          <h2>Target Audience Segments</h2>
-          <table>
-            <tr><th>Segment</th><th>Profile</th><th>Primary Need</th></tr>
-            <tr><td>Growth SMEs</td><td>50–200 employees, Series A–B</td><td>Scalable software & data</td></tr>
-            <tr><td>Enterprise IT</td><td>200+ employees, legacy systems</td><td>Modernisation & security</td></tr>
-            <tr><td>NGOs & Public Sector</td><td>Donor-funded, compliance-heavy</td><td>Reporting & dashboards</td></tr>
-          </table>
-          <h2>Brand Pillars</h2>
-          <ul>
-            <li><strong>Expertise</strong> — Deep technical knowledge across five service domains</li>
-            <li><strong>Partnership</strong> — We embed with client teams, not just deliver and leave</li>
-            <li><strong>Transparency</strong> — Clear pricing, honest timelines, no surprises</li>
-            <li><strong>Innovation</strong> — Continuously integrating emerging technology into our practice</li>
-          </ul>
-          <h2>Visual Identity</h2>
-          <p>The Siweni visual language is clean, modern, and confident. Primary palette: deep charcoal (#111827) as anchor, warm steel blue (#7aa7c7) as accent. Typography is geometric sans-serif for headings (bold, wide-tracked) and humanist sans-serif for body copy.</p>
-          <h2>2025 Campaign Themes</h2>
-          <ul>
-            <li>Q1: Thought leadership content series — "The State of African Tech"</li>
-            <li>Q2: Client success story campaign — video + case study format</li>
-            <li>Q3: Employer brand campaign — hiring for engineers and data scientists</li>
-            <li>Q4: Year-in-review + 2026 preview, event sponsorship</li>
-          </ul>`
-      },
-      'Service Proposal Template': {
-        type: 'word', meta: 'General · Feb 2025 · 0.9 MB',
-        html: `
-          <h1>Service Proposal</h1>
-          <p class="doc-byline">Siweni Innovative Solutions &nbsp;·&nbsp; [Client Name] &nbsp;·&nbsp; [Date]</p>
-          <div class="callout"><strong>How to use this template:</strong> Replace all bracketed placeholders with client-specific information. Review section 4 (Pricing) carefully — adjust rates per the approved rate card before sending.</div>
-          <h2>1. Executive Overview</h2>
-          <p>Thank you for considering Siweni Innovative Solutions. This proposal outlines our recommended approach to [describe project or problem], tailored to [Client Name]'s specific requirements and strategic objectives.</p>
-          <p>We have reviewed your brief dated [date] and engaged with [contact name] to understand your current technical environment, team capabilities, and desired outcomes. This document summarises our proposed solution, delivery approach, timeline, and investment.</p>
-          <h2>2. Problem Statement</h2>
-          <p>[Describe the client's current situation and the core challenge or opportunity. Be specific — reference any data or metrics the client shared during discovery.]</p>
-          <h2>3. Proposed Solution</h2>
-          <h3>Phase 1 — Discovery & Design (Weeks 1–3)</h3>
-          <ul>
-            <li>Stakeholder workshops and requirements gathering</li>
-            <li>Technical architecture review and solution design</li>
-            <li>Delivery of solution blueprint and project plan</li>
-          </ul>
-          <h3>Phase 2 — Development & Integration (Weeks 4–10)</h3>
-          <ul>
-            <li>Agile development sprints with weekly demos</li>
-            <li>Integration with existing systems ([list systems])</li>
-            <li>Security review and penetration testing</li>
-          </ul>
-          <h3>Phase 3 — Launch & Handover (Weeks 11–12)</h3>
-          <ul>
-            <li>Deployment to production environment</li>
-            <li>Staff training and documentation</li>
-            <li>30-day post-launch support included</li>
-          </ul>
-          <h2>4. Investment</h2>
-          <table>
-            <tr><th>Phase</th><th>Duration</th><th>Cost (USD)</th></tr>
-            <tr><td>Discovery & Design</td><td>3 weeks</td><td>$[X]</td></tr>
-            <tr><td>Development</td><td>7 weeks</td><td>$[X]</td></tr>
-            <tr><td>Launch & Handover</td><td>2 weeks</td><td>$[X]</td></tr>
-            <tr><td><strong>Total</strong></td><td><strong>12 weeks</strong></td><td><strong>$[TOTAL]</strong></td></tr>
-          </table>
-          <h2>5. Next Steps</h2>
-          <p>To proceed, please sign and return the attached Statement of Work. We can begin onboarding within [X] business days of receipt. Contact [name] at [email] with any questions.</p>`
-      },
-      'Budget Tracker 2025': {
-        type: 'xlsx', meta: 'Finance · Jan 2025 · 1.2 MB',
-        html: `
-          <h1>Budget Tracker 2025</h1>
-          <p class="doc-byline">Siweni Finance &nbsp;·&nbsp; FY 2025 &nbsp;·&nbsp; Updated January 2025</p>
-          <h2>Annual Budget Summary</h2>
-          <div class="metric-row">
-            <div class="metric"><b>$3.8M</b><span>Total Budget</span></div>
-            <div class="metric"><b>$2.4M</b><span>YTD Actual</span></div>
-            <div class="metric"><b>63%</b><span>Utilised</span></div>
-          </div>
-          <h2>Revenue Budget vs Actual (Q1–Q4)</h2>
-          <table>
-            <tr><th>Quarter</th><th>Budget</th><th>Actual</th><th>Variance</th></tr>
-            <tr><td>Q1 2025</td><td>$820,000</td><td>$847,000</td><td style="color:#16a34a;">+$27,000</td></tr>
-            <tr><td>Q2 2025</td><td>$900,000</td><td>$921,000</td><td style="color:#16a34a;">+$21,000</td></tr>
-            <tr><td>Q3 2025</td><td>$990,000</td><td>$912,000</td><td style="color:#dc2626;">−$78,000</td></tr>
-            <tr><td>Q4 2025</td><td>$1,090,000</td><td>—</td><td>—</td></tr>
-          </table>
-          <h2>Expense Categories — YTD</h2>
-          <table>
-            <tr><th>Category</th><th>Annual Budget</th><th>YTD Spend</th><th>% Used</th></tr>
-            <tr><td>Payroll & Benefits</td><td>$1,800,000</td><td>$1,248,000</td><td>69%</td></tr>
-            <tr><td>Software & Tooling</td><td>$220,000</td><td>$134,000</td><td>61%</td></tr>
-            <tr><td>Marketing & Events</td><td>$180,000</td><td>$92,000</td><td>51%</td></tr>
-            <tr><td>Cloud Infrastructure</td><td>$150,000</td><td>$98,000</td><td>65%</td></tr>
-            <tr><td>Travel & Client Hosting</td><td>$90,000</td><td>$44,000</td><td>49%</td></tr>
-            <tr><td>Training & Certification</td><td>$60,000</td><td>$38,000</td><td>63%</td></tr>
-            <tr><td>Contingency Reserve</td><td>$120,000</td><td>$0</td><td>0%</td></tr>
-          </table>
-          <div class="callout"><strong>Note:</strong> Q3 revenue shortfall was due to two contract delays in the Data Science practice. Both contracts have since been signed and will be recognised in Q4.</div>`
-      },
-      'Cybersecurity Policy Guide': {
-        type: 'pdf', meta: 'Security · Dec 2024 · 3.7 MB',
-        html: `
-          <h1>Cybersecurity Policy Guide</h1>
-          <p class="doc-byline">Siweni Security Practice &nbsp;·&nbsp; December 2024 &nbsp;·&nbsp; v2.1</p>
-          <div class="callout"><span class="tag">Confidential</span> This document contains security policies. Distribute only to authorised personnel.</div>
-          <h2>1. Purpose & Scope</h2>
-          <p>This guide defines Siweni's information security policies, standards, and procedures. It applies to all employees, contractors, and third-party service providers who access Siweni systems, networks, or data.</p>
-          <h2>2. Access Control Policy</h2>
-          <h3>2.1 Principle of Least Privilege</h3>
-          <p>All user accounts must be provisioned with the minimum permissions required to perform their job function. Access rights are reviewed quarterly by the IT Security team and revoked immediately upon role change or termination.</p>
-          <h3>2.2 Multi-Factor Authentication</h3>
-          <p>MFA is mandatory for all internal systems, cloud services, and remote access. Approved MFA methods: TOTP authenticator apps (Google Authenticator, Authy), hardware security keys (FIDO2/WebAuthn). SMS-based OTP is not permitted for high-privilege accounts.</p>
-          <h3>2.3 Password Requirements</h3>
-          <ul>
-            <li>Minimum 14 characters, combining upper/lowercase, numbers, and symbols</li>
-            <li>Passwords must not contain username or dictionary words</li>
-            <li>90-day rotation for privileged accounts; 180-day for standard accounts</li>
-            <li>Password reuse prohibited for last 12 passwords</li>
-          </ul>
-          <h2>3. Data Classification</h2>
-          <table>
-            <tr><th>Classification</th><th>Examples</th><th>Controls Required</th></tr>
-            <tr><td><span class="tag">Restricted</span></td><td>Client PII, financial records, contracts</td><td>Encryption at rest & transit, MFA, audit logging</td></tr>
-            <tr><td><span class="tag">Confidential</span></td><td>Internal strategies, source code, credentials</td><td>Encryption at rest, access controls, NDA</td></tr>
-            <tr><td><span class="tag">Internal</span></td><td>Policies, project docs, internal comms</td><td>Access controls, no external sharing</td></tr>
-            <tr><td>Public</td><td>Marketing materials, job postings</td><td>Standard controls</td></tr>
-          </table>
-          <h2>4. Incident Response</h2>
-          <p>All security incidents must be reported to <strong>security@siweni.com</strong> within 2 hours of discovery. The incident response team will classify the event and initiate the appropriate containment, eradication, and recovery procedures per ISO/IEC 27035.</p>
-          <h2>5. Acceptable Use</h2>
-          <ul>
-            <li>Company devices must not be used for personal cryptocurrency mining, peer-to-peer file sharing, or accessing pirated software</li>
-            <li>Remote work connections must use the company VPN at all times</li>
-            <li>Removable media (USB drives) are prohibited unless approved by IT Security in writing</li>
-          </ul>`
-      },
-      'Data Analytics Overview': {
-        type: 'pptx', meta: 'Data Science · Nov 2024 · 4.3 MB',
-        html: `
-          <h1>Data Analytics Overview</h1>
-          <p class="doc-byline">Siweni Data Science Practice &nbsp;·&nbsp; November 2024</p>
-          <h2>Our Data Capabilities</h2>
-          <div class="metric-row">
-            <div class="metric"><b>12</b><span>Active Dashboards</span></div>
-            <div class="metric"><b>4.2B</b><span>Rows Processed</span></div>
-            <div class="metric"><b>98.7%</b><span>Uptime SLA</span></div>
-          </div>
-          <h2>Service Offerings</h2>
-          <table>
-            <tr><th>Service</th><th>Description</th><th>Typical Timeline</th></tr>
-            <tr><td>BI Dashboard</td><td>Interactive Tableau/Power BI dashboards connected to live data sources</td><td>3–5 weeks</td></tr>
-            <tr><td>Predictive Model</td><td>ML models for churn, demand, fraud, or risk prediction</td><td>6–10 weeks</td></tr>
-            <tr><td>Data Pipeline</td><td>ETL/ELT pipelines from source systems to data warehouse</td><td>4–8 weeks</td></tr>
-            <tr><td>Data Audit</td><td>Assessment of data quality, governance, and infrastructure</td><td>2–3 weeks</td></tr>
-          </table>
-          <h2>Technology Stack</h2>
-          <ul>
-            <li><strong>Data Warehousing:</strong> BigQuery, Snowflake, Redshift</li>
-            <li><strong>Visualisation:</strong> Tableau, Power BI, Looker, custom React dashboards</li>
-            <li><strong>ML Frameworks:</strong> Python (scikit-learn, XGBoost, TensorFlow), R</li>
-            <li><strong>Orchestration:</strong> Apache Airflow, dbt, Prefect</li>
-            <li><strong>Cloud:</strong> AWS, Google Cloud Platform, Azure</li>
-          </ul>
-          <h2>Recent Client Impact</h2>
-          <div class="callout">A regional retail chain used our demand forecasting model to reduce overstock by <strong>34%</strong>, saving $1.2M in inventory costs in the first year.</div>
-          <h2>Getting Started</h2>
-          <p>All engagements begin with a free 2-hour Data Discovery Workshop where we assess your current data maturity, identify quick wins, and scope a roadmap. Contact <strong>data@siweni.com</strong> to schedule.</p>`
-      },
-      'Client Onboarding Checklist': {
-        type: 'word', meta: 'Operations · Oct 2024 · 0.5 MB',
-        html: `
-          <h1>Client Onboarding Checklist</h1>
-          <p class="doc-byline">Siweni Operations &nbsp;·&nbsp; October 2024 &nbsp;·&nbsp; v3.0</p>
-          <div class="callout">Complete all items in order. Assign an owner and due date for each task. This checklist should be fully completed within 5 business days of contract signature.</div>
-          <h2>Week 1 — Administrative Setup</h2>
-          <ul>
-            <li>☐ Send signed contract copy to client</li>
-            <li>☐ Create client folder in project management system (Notion/Jira)</li>
-            <li>☐ Set up dedicated client Slack channel and invite stakeholders</li>
-            <li>☐ Schedule kickoff meeting (within 3 business days)</li>
-            <li>☐ Issue invoice for upfront payment (if applicable)</li>
-            <li>☐ Assign project lead and backup contact</li>
-          </ul>
-          <h2>Week 1 — Technical Setup</h2>
-          <ul>
-            <li>☐ Create client repository in GitHub (private, with appropriate team access)</li>
-            <li>☐ Set up staging and development environments</li>
-            <li>☐ Collect credentials: existing systems, APIs, cloud accounts</li>
-            <li>☐ Complete NDA and data processing agreement if handling PII</li>
-            <li>☐ Add client domain to monitoring and uptime tools</li>
-          </ul>
-          <h2>Kickoff Meeting Agenda</h2>
-          <ol>
-            <li>Introductions — team members and roles on both sides (10 min)</li>
-            <li>Project overview — objectives, success metrics, constraints (20 min)</li>
-            <li>Timeline walkthrough — milestones, review gates, go-live date (15 min)</li>
-            <li>Communication cadence — standups, weekly reports, escalation path (10 min)</li>
-            <li>Open questions (15 min)</li>
-          </ol>
-          <h2>Ongoing — During Project</h2>
-          <ul>
-            <li>☐ Weekly status report sent every Friday by 5pm</li>
-            <li>☐ Sprint demos scheduled bi-weekly</li>
-            <li>☐ Risk register updated and shared monthly</li>
-            <li>☐ Client sign-off obtained at each milestone before proceeding</li>
-          </ul>`
-      },
-      'Software Dev Roadmap': {
-        type: 'pdf', meta: 'Engineering · Sep 2024 · 1.8 MB',
-        html: `
-          <h1>Software Development Roadmap</h1>
-          <p class="doc-byline">Siweni Engineering &nbsp;·&nbsp; September 2024 &nbsp;·&nbsp; FY 2025</p>
-          <h2>Strategic Objectives</h2>
-          <ul>
-            <li>Grow the Software Design & Development practice to $1.2M ARR by Q4 2025</li>
-            <li>Standardise delivery methodology across all client engagements</li>
-            <li>Build and document 3 reusable internal frameworks (auth, data pipeline, dashboard)</li>
-            <li>Achieve ISO 9001 process certification by Q3 2025</li>
-          </ul>
-          <h2>Q1 2025 — Foundation</h2>
-          <div class="callout"><span class="tag">In Progress</span> Standardising our project scaffolding template and CI/CD pipeline across all new engagements.</div>
-          <ul>
-            <li>Ship internal developer portal (Backstage-based)</li>
-            <li>Migrate all client repos to GitHub Enterprise</li>
-            <li>Define and document coding standards (ESLint, Prettier, pre-commit hooks)</li>
-            <li>Complete first internal framework: authentication service (JWT + OAuth2)</li>
-          </ul>
-          <h2>Q2 2025 — Scale</h2>
-          <ul>
-            <li>Hire 2 senior engineers and 1 DevOps specialist</li>
-            <li>Launch partner programme with 3 cloud providers (AWS, GCP, Azure)</li>
-            <li>Ship reusable data pipeline framework (connector library + orchestration layer)</li>
-            <li>Implement automated security scanning in all CI/CD pipelines</li>
-          </ul>
-          <h2>Q3–Q4 2025 — Innovation</h2>
-          <ul>
-            <li>Introduce AI-assisted code review tooling for all projects</li>
-            <li>Build internal dashboard framework (React component library + Recharts)</li>
-            <li>Pilot low-code offering for SME clients with simpler requirements</li>
-            <li>Achieve ISO 9001 certification; publish public engineering blog</li>
-          </ul>
-          <h2>Technology Standards 2025</h2>
-          <table>
-            <tr><th>Domain</th><th>Preferred Stack</th></tr>
-            <tr><td>Web Frontend</td><td>React 18, TypeScript, Vite, Tailwind CSS</td></tr>
-            <tr><td>Backend API</td><td>Node.js (Fastify), Python (FastAPI), PostgreSQL</td></tr>
-            <tr><td>Mobile</td><td>React Native (Expo), Flutter for complex UIs</td></tr>
-            <tr><td>Infrastructure</td><td>Terraform, Docker, Kubernetes (GKE/EKS)</td></tr>
-            <tr><td>Monitoring</td><td>Datadog, Sentry, PagerDuty</td></tr>
-          </table>`
-      }
-    };
-
-    /* ─ Sidebar tab switching ─ */
-    function switchSidebarTab(tab, btn){
-      document.querySelectorAll('.viewer-sidebar-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.viewer-sidebar-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('sidebar-panel-'+tab).classList.add('active');
-    }
-
-    /* ─ Star picker interactions ─ */
-    let pickedRating = 0;
-    let commentPickedRating = 0;
-
-    function wireStarPicker(containerId, onPick){
-      const el = document.getElementById(containerId);
-      el.addEventListener('mouseover', e => {
-        const s = e.target.closest('[data-v]'); if(!s) return;
-        highlightStars(containerId, +s.dataset.v);
-      });
-      el.addEventListener('mouseleave', () => highlightStars(containerId, onPick()));
-      el.addEventListener('click', e => {
-        const s = e.target.closest('[data-v]'); if(!s) return;
-        const v = +s.dataset.v;
-        if(containerId==='star-picker'){ pickedRating=v; document.getElementById('rating-submit-btn').disabled=false; }
-        else { commentPickedRating=v; }
-        highlightStars(containerId, v);
-      });
-    }
-    /* Star pickers are wired lazily on first openViewer call */
-    let _starPickersWired = false;
-    function ensureStarPickersWired(){
-      if(_starPickersWired) return;
-      _starPickersWired = true;
-      wireStarPicker('star-picker', () => pickedRating);
-      wireStarPicker('comment-rating-pick', () => commentPickedRating);
-    }
-
-    function highlightStars(containerId, val){
-      document.querySelectorAll('#'+containerId+' [data-v]').forEach(s => {
-        const v = +s.dataset.v;
-        s.className = v <= val ? 'fa-solid fa-star lit' : 'fa-regular fa-star';
-        s.setAttribute('data-v', v);
-      });
-    }
-
-    /* ─ Submit rating ─ */
-    function submitRating(){
-      if(!pickedRating || !currentViewerTitle) return;
-      const st = getDocState(currentViewerTitle);
-      if(st.userRating){ alert('You have already rated this document.'); return; }
-      st.userRating = pickedRating;
-      st.ratings.push(pickedRating);
-      st.ratingBreakdown[pickedRating] = (st.ratingBreakdown[pickedRating]||0)+1;
-      const avg = calcAvg(st.ratings);
-      document.querySelectorAll('#lib-grid .doc-card').forEach(card => {
-        if(card.dataset.title === currentViewerTitle) renderCardStars(card, avg);
-      });
-      renderRatingSummary(st);
-      persistDocState();
-      document.getElementById('rating-submit-btn').disabled = true;
-      document.getElementById('rating-submit-btn').textContent = 'Rated ✓';
-    }
-
-    function calcAvg(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
-
-    function renderCardStars(card, avg){
-      const starsEl = card.querySelector('.doc-stars'); if(!starsEl) return;
-      let html = '';
-      for(let i=1;i<=5;i++) html += i<=Math.round(avg)
-        ? '<i class="fa-solid fa-star"></i>'
-        : '<i class="fa-regular fa-star empty"></i>';
-      starsEl.innerHTML = html;
-    }
-
-    function renderRatingSummary(st){
-      const avg = calcAvg(st.ratings);
-      const total = st.ratings.length;
-      document.getElementById('rating-avg-num').textContent = avg.toFixed(1);
-      document.getElementById('rating-avg-detail').textContent = total+(total===1?' rating':' ratings');
-      const starsEl = document.getElementById('rating-avg-stars');
-      starsEl.innerHTML = '';
-      for(let i=1;i<=5;i++){
-        const ic = document.createElement('i');
-        ic.className = i<=Math.round(avg) ? 'fa-solid fa-star' : 'fa-regular fa-star empty';
-        starsEl.appendChild(ic);
-      }
-      const barsEl = document.getElementById('rating-bars');
-      barsEl.innerHTML = '';
-      for(let v=5;v>=1;v--){
-        const cnt = st.ratingBreakdown[v]||0;
-        const pct = total ? Math.round(cnt/total*100) : 0;
-        barsEl.innerHTML += `<div class="rating-bar-row">
-          <span class="rating-bar-label">${v}</span>
-          <div class="rating-bar-track"><div class="rating-bar-fill" style="width:${pct}%"></div></div>
-          <span class="rating-bar-count">${cnt}</span>
-        </div>`;
-      }
-    }
-
-    /* ─ Submit comment ─ */
-    function submitComment(){
-      const text = document.getElementById('comment-text-input').value.trim();
-      if(!text || !currentViewerTitle) return;
-      const st = getDocState(currentViewerTitle);
-      const comment = { author:'You', text, rating:commentPickedRating, time:'Just now' };
-      st.comments.unshift(comment);
-      renderComments(st);
-      document.getElementById('comment-text-input').value = '';
-      if(comment.rating > 0 && !st.userRating){
-        st.userRating = comment.rating;
-        st.ratings.push(comment.rating);
-        st.ratingBreakdown[comment.rating]=(st.ratingBreakdown[comment.rating]||0)+1;
-        pickedRating = comment.rating;
-        highlightStars('star-picker', pickedRating);
-        document.getElementById('rating-submit-btn').disabled = true;
-        document.getElementById('rating-submit-btn').textContent = 'Rated ✓';
-        renderRatingSummary(st);
-        const avg = calcAvg(st.ratings);
-        document.querySelectorAll('#lib-grid .doc-card').forEach(card => {
-          if(card.dataset.title === currentViewerTitle) renderCardStars(card, avg);
-        });
-      }
-      commentPickedRating = 0;
-      highlightStars('comment-rating-pick', 0);
-      persistDocState();
-    }
-
-    function renderComments(st){
-      const list = document.getElementById('comments-list');
-      const empty = document.getElementById('comments-empty');
-      if(!st.comments.length){ empty.style.display=''; return; }
-      empty.style.display = 'none';
-      list.querySelectorAll('.comment-item').forEach(el => el.remove());
-      st.comments.forEach(c => {
-        const stars = Array.from({length:5},(_,i)=>
-          `<i class="${i<c.rating?'fa-solid fa-star':'fa-regular fa-star empty'}"></i>`).join('');
-        const div = document.createElement('div');
-        div.className = 'comment-item';
-        div.innerHTML = `
-          <div class="comment-header">
-            <div class="comment-avatar">${c.author[0].toUpperCase()}</div>
-            <span class="comment-author">${c.author}</span>
-            <span class="comment-time">${c.time}</span>
-          </div>
-          ${c.rating ? `<div class="comment-stars">${stars}</div>` : ''}
-          <p class="comment-text">${c.text}</p>`;
-        list.insertBefore(div, empty);
-      });
-    }
-
-    /* ─ Current viewer doc ─ */
-    let currentViewerTitle = '';
-
-    /* Open viewer */
-    function openViewer(cardEl) {
-      ensureStarPickersWired();
-      currentViewerTitle = cardEl.dataset.title || 'Document';
-      const docDef = DEMO_DOCS[currentViewerTitle];
-      const fileUrl = cardEl.dataset.fileUrl || null;
-
-      document.getElementById('viewer-title').textContent = currentViewerTitle;
-      const body = document.getElementById('viewer-body');
-      body.innerHTML = '';
-      const downloadBtn = document.getElementById('viewer-download-btn');
-      const openBtn     = document.getElementById('viewer-open-btn');
-
-      if (fileUrl) {
-        const ext = (cardEl.dataset.fileExt || '').toLowerCase();
-        downloadBtn.href = fileUrl; downloadBtn.download = currentViewerTitle;
-        openBtn.style.display = '';
-        document.getElementById('viewer-meta').textContent = cardEl.dataset.meta || '';
-        if (ext === 'pdf') {
-          const wrap = document.createElement('div'); wrap.className = 'viewer-iframe-wrap';
-          const iframe = document.createElement('iframe');
-          iframe.id = 'viewer-iframe'; iframe.src = fileUrl; iframe.title = currentViewerTitle;
-          wrap.appendChild(iframe); body.appendChild(wrap);
-          openBtn.onclick = () => window.open(fileUrl, '_blank');
-        } else {
-          const isBlob = fileUrl.startsWith('blob:');
-          if (!isBlob) {
-            const wrap = document.createElement('div'); wrap.className = 'viewer-iframe-wrap';
-            const iframe = document.createElement('iframe');
-            iframe.id = 'viewer-iframe';
-            iframe.src = 'https://docs.google.com/viewer?embedded=true&url='+encodeURIComponent(fileUrl);
-            iframe.title = currentViewerTitle;
-            wrap.appendChild(iframe); body.appendChild(wrap);
-          } else {
-            /* Non-PDF blob — show formatted notice with download */
-            const extLabel = ext.toUpperCase() || 'FILE';
-            const iconMap2 = {word:'fa-file-word',pptx:'fa-file-powerpoint',xlsx:'fa-file-excel',doc:'fa-file-word',ppt:'fa-file-powerpoint',xls:'fa-file-excel'};
-            const notice = document.createElement('div'); notice.className = 'viewer-upload-notice';
-            notice.innerHTML = `
-              <i class="fa-solid ${iconMap2[ext]||'fa-file'}" style="font-size:52px;color:#d1d5db;"></i>
-              <p style="font-weight:700;font-size:16px;color:#111827;margin:0;">${currentViewerTitle}</p>
-              <p style="font-size:13px;color:#9ca3af;margin:4px 0 0;">${extLabel} document · Preview not available in browser</p>
-              <a href="${fileUrl}" download="${currentViewerTitle}" class="viewer-topbar-btn" style="margin-top:16px;padding:10px 22px;font-size:13px;">
-                <i class="fa-solid fa-download"></i>&nbsp; Download to open
-              </a>`;
-            body.appendChild(notice);
-          }
-        }
-      } else if (docDef) {
-        downloadBtn.href = '#'; downloadBtn.removeAttribute('download');
-        downloadBtn.onclick = e => { e.preventDefault(); alert('Download available for uploaded documents. This is a demo document.'); };
-        openBtn.style.display = 'none';
-        document.getElementById('viewer-meta').textContent = docDef.meta;
-        const reader = document.createElement('div'); reader.className = 'viewer-reader';
-        reader.innerHTML = `<div class="viewer-reader-inner">${docDef.html}</div>
-          <div class="viewer-reader-footer"><i class="fa-regular fa-file"></i>&nbsp; ${currentViewerTitle} &nbsp;·&nbsp; ${docDef.meta} &nbsp;·&nbsp; Demo document</div>`;
-        body.appendChild(reader);
-      } else {
-        openBtn.style.display = 'none';
-        const notice = document.createElement('div'); notice.className = 'viewer-upload-notice';
-        notice.innerHTML = `<i class="fa-solid fa-file-circle-question"></i><p>No preview available for this document.</p>`;
-        body.appendChild(notice);
-      }
-
-      /* Restore sidebar state */
-      const st = getDocState(currentViewerTitle);
-      pickedRating = st.userRating;
-      highlightStars('star-picker', pickedRating);
-      document.getElementById('rating-submit-btn').disabled = !!st.userRating;
-      document.getElementById('rating-submit-btn').textContent = st.userRating ? 'Rated ✓' : 'Submit Rating';
-      renderRatingSummary(st);
-      renderComments(st);
-      document.querySelectorAll('.viewer-sidebar-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.viewer-sidebar-panel').forEach(p => p.classList.remove('active'));
-      document.querySelector('.viewer-sidebar-tab').classList.add('active');
-      document.getElementById('sidebar-panel-rating').classList.add('active');
-      commentPickedRating = 0; highlightStars('comment-rating-pick', 0);
-
-      document.getElementById('viewer-backdrop').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeViewer() {
-      document.getElementById('viewer-backdrop').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('viewer-backdrop').addEventListener('click', e => {
-        if (e.target === document.getElementById('viewer-backdrop')) closeViewer();
-      });
-      const mobLibLink = document.getElementById('nav-lib-link-mobile');
-      if(mobLibLink) mobLibLink.addEventListener('click', showLibrary);
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        const vb = document.getElementById('viewer-backdrop');
-        if (vb && vb.classList.contains('open')) closeViewer();
-        else if (document.getElementById('upload-modal-backdrop').classList.contains('open')) closeUploadModal();
-      }
-    });
-
-    /* Wire Preview + Download buttons — global delegation handles dynamically added cards */
-    document.addEventListener('click', e => {
-      /* Find closest .doc-btn regardless of what child element was clicked */
-      const btn = e.target.closest('.doc-btn');
-      if (!btn) return;
-      const card = btn.closest('.doc-card');
-      if (!card) return;
-
-      if (btn.classList.contains('primary')) {
-        /* Download */
-        const url = card.dataset.fileUrl;
-        if (url) {
-          const a = document.createElement('a');
-          a.href = url; a.download = card.dataset.title || 'document';
-          document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        } else {
-          alert('Download is only available for uploaded documents. Demo documents are for preview only.');
-        }
-      } else {
-        /* Preview */
-        openViewer(card);
-      }
-    });
-
-    /* ── RESTORE PERSISTED UPLOADS ON PAGE LOAD ── */
-    function restoreUploadedCards(){
-      const uploads = loadUploads();
-      const coverMap = {pdf:'doc-cover-pdf',word:'doc-cover-word',pptx:'doc-cover-pptx',xlsx:'doc-cover-xlsx'};
-      const iconMap  = {pdf:'fa-file-pdf',word:'fa-file-word',pptx:'fa-file-powerpoint',xlsx:'fa-file-excel'};
-      const labelMap = {pdf:'PDF',word:'DOCX',pptx:'PPTX',xlsx:'XLSX'};
-      uploads.forEach(u => {
-        const blobUrl = u.fileBase64; /* use base64 data URL directly */
-        const st = getDocState(u.title);
-        const avg = st.ratings.length ? st.ratings.reduce((a,b)=>a+b,0)/st.ratings.length : 0;
-        const starsHtml = Array.from({length:5},(_,i)=>
-          i<Math.round(avg)
-            ? '<i class="fa-solid fa-star"></i>'
-            : '<i class="fa-regular fa-star empty"></i>').join('');
-        const coverStyle = u.coverDataUrl
-          ? "background-image:url('"+u.coverDataUrl+"'); background-size:cover; background-position:center;"
-          : '';
-        const iconHtml = u.coverDataUrl ? '' : '<i class="fa-solid '+(iconMap[u.type]||'fa-file')+' doc-cover-icon"></i>';
+    function libHandleUpload(input){
+      const files = Array.from(input.files);
+      if(!files.length) return;
+      files.forEach(file => {
+        const ext = file.name.split('.').pop().toLowerCase();
+        const typeMap = { pdf:'pdf', docx:'word', doc:'word', pptx:'pptx', ppt:'pptx', xlsx:'xlsx', xls:'xlsx' };
+        const coverMap = { pdf:'doc-cover-pdf', word:'doc-cover-word', pptx:'doc-cover-pptx', xlsx:'doc-cover-xlsx' };
+        const iconMap  = { pdf:'fa-file-pdf', word:'fa-file-word', pptx:'fa-file-powerpoint', xlsx:'fa-file-excel' };
+        const labelMap = { pdf:'PDF', word:'DOCX', pptx:'PPTX', xlsx:'XLSX' };
+        const t = typeMap[ext] || 'generic';
+        const coverClass = coverMap[t] || 'doc-cover-generic';
+        const icon = iconMap[t] || 'fa-file';
+        const badge = labelMap[t] || ext.toUpperCase();
+        const size = (file.size / (1024*1024)).toFixed(1) + ' MB';
         const card = document.createElement('div');
-        card.className = 'doc-card inview';
-        card.dataset.type     = u.type;
-        card.dataset.title    = u.title;
-        card.dataset.year     = u.dateStr ? u.dateStr.slice(-4) : '';
-        card.dataset.category = u.category.toLowerCase();
-        card.dataset.fileUrl  = blobUrl;
-        card.dataset.fileExt  = u.ext;
-        card.dataset.meta     = u.metaStr;
-        card.innerHTML =
-          '<div class="doc-cover '+(coverMap[u.type]||'doc-cover-generic')+'" style="'+coverStyle+'">'+
-            iconHtml+
-            '<span class="doc-cover-badge">'+(labelMap[u.type]||u.ext.toUpperCase())+'</span>'+
-            '<button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>'+
-          '</div>'+
-          '<div class="doc-body">'+
-            '<p class="doc-type">'+u.category+'</p>'+
-            '<p class="doc-title">'+u.title+'</p>'+
-            '<p class="doc-meta">'+u.dateStr+' &middot; '+u.size+'</p>'+
-            (u.comment ? '<p style="font-size:11px;color:#6b7280;margin:0 0 6px;font-style:italic;">'+u.comment+'</p>' : '')+
-            '<div class="doc-stars">'+starsHtml+'</div>'+
-            '<div class="doc-actions">'+
-              '<button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>'+
-              '<button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>'+
-            '</div>'+
-          '</div>';
-        document.getElementById('lib-grid').appendChild(card);
+        card.className = 'doc-card';
+        card.dataset.type = t;
+        card.dataset.title = file.name.replace(/\.[^.]+$/, '');
+        card.innerHTML = `
+          <div class="doc-cover ${coverClass}">
+            <i class="fa-solid ${icon} doc-cover-icon" style="color:#fff;"></i>
+            <span class="doc-cover-badge">${badge}</span>
+            <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+          </div>
+          <div class="doc-body">
+            <p class="doc-type">Uploaded</p>
+            <p class="doc-title">${file.name.replace(/\.[^.]+$/, '')}</p>
+            <p class="doc-meta">New · Just now · ${size}</p>
+            <div class="doc-stars">
+              <i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i>
+            </div>
+            <div class="doc-actions">
+              <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+              <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+            </div>
+          </div>`;
+        const grid = document.getElementById('lib-grid');
+        grid.insertBefore(card, grid.firstChild);
       });
       updateLibCount();
+      input.value = '';
     }
-
-    /* Also restore star ratings on the built-in demo cards */
-    function restoreDemoCardStars(){
-      document.querySelectorAll('#lib-grid .doc-card').forEach(card => {
-        const title = card.dataset.title;
-        if(!title || !DOC_STATE[title]) return;
-        const st = DOC_STATE[title];
-        const avg = calcAvg(st.ratings);
-        renderCardStars(card, avg);
-      });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      restoreUploadedCards();
-      restoreDemoCardStars();
+    
+    document.querySelectorAll(".catalog .btn").forEach(btn=>{
+      btn.addEventListener("click",()=>alert("Demo control — connect this to your real catalog carousel."));
     });
 
-        /* ── MAIN SITE JS ── */
-    document.querySelectorAll(".circle-btn").forEach(btn=>{btn.addEventListener("click",()=>alert("Demo control."));});
     const io=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("inview");io.unobserve(e.target);}});
-    },{threshold:.05});
-    /* Force all [data-reveal] visible on load if main site is showing */
-    function observeReveal(){
-      if(mainSite.style.display === 'none') return;
-      document.querySelectorAll("[data-reveal]").forEach(el=>{
-        el.classList.add("inview"); /* Always visible — animations are a bonus not a requirement */
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add("inview");
+          io.unobserve(e.target);
+        }
+      })
+    },{threshold:.15});
+
+    document.querySelectorAll("[data-reveal]").forEach(el=>io.observe(el));
+
+    const cf=document.getElementById("contact-form");
+    if(cf){
+      cf.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        const n=document.getElementById("c-name").value.trim();
+        const em=document.getElementById("c-email").value.trim();
+        const m=document.getElementById("c-msg").value.trim();
+        const subj=encodeURIComponent("New message from " + n);
+        const body=encodeURIComponent("Name: " + n + "\nEmail: " + em + "\n\nMessage:\n" + m);
+        window.location.href = "mailto:info@siweni.com?subject=" + subj + "&body=" + body;
+        alert("Thank you! Opening your email client...");
       });
     }
-    setTimeout(observeReveal, 0);
-    const cf=document.getElementById("contact-form");
-    if(cf){cf.addEventListener("submit",(e)=>{e.preventDefault();const n=document.getElementById("c-name").value.trim();const em=document.getElementById("c-email").value.trim();const m=document.getElementById("c-msg").value.trim();const subj=encodeURIComponent("New message from "+n);const body=encodeURIComponent("Name: "+n+"\nEmail: "+em+"\n\nMessage:\n"+m);window.location.href="mailto:info@siweni.com?subject="+subj+"&body="+body;});}
-
-
-    /* ── STICKY TOPBAR ON SCROLL ── */
-    (function(){
-      const topbar = document.querySelector('.topbar');
-      let placeholder = document.createElement('div');
-      placeholder.className = 'topbar-placeholder';
-      topbar.parentNode.insertBefore(placeholder, topbar.nextSibling);
-      let topbarHeight = 0;
-      let topbarOffset = 0;
-
-      function measure(){
-        if(!topbar.classList.contains('is-sticky')){
-          topbarOffset = topbar.getBoundingClientRect().top + window.scrollY;
-          topbarHeight = topbar.offsetHeight;
-        }
-      }
-
-      function onScroll(){
-        if(window.scrollY > topbarOffset){
-          if(!topbar.classList.contains('is-sticky')){
-            topbarHeight = topbar.offsetHeight;
-            placeholder.style.height = topbarHeight + 'px';
-            placeholder.classList.add('visible');
-            topbar.classList.add('is-sticky');
-          }
-        } else {
-          topbar.classList.remove('is-sticky');
-          placeholder.classList.remove('visible');
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', () => { topbar.classList.remove('is-sticky'); placeholder.classList.remove('visible'); measure(); onScroll(); });
-      measure();
-    })();
-    /* ── MOBILE MENU ── */
-    function toggleMobileMenu(){
-      const btn = document.getElementById('hamburger-btn');
-      const menu = document.getElementById('mobile-nav-dropdown');
-      const isOpen = menu.classList.contains('open');
-      if(isOpen){ closeMobileMenu(); } else { openMobileMenu(); }
-    }
-    function openMobileMenu(){
-      document.getElementById('hamburger-btn').classList.add('open');
-      document.getElementById('hamburger-btn').setAttribute('aria-expanded','true');
-      document.getElementById('mobile-nav-dropdown').classList.add('open');
-    }
-    function closeMobileMenu(){
-      document.getElementById('hamburger-btn').classList.remove('open');
-      document.getElementById('hamburger-btn').setAttribute('aria-expanded','false');
-      document.getElementById('mobile-nav-dropdown').classList.remove('open');
-    }
-    /* Close menu on outside click */
-    document.addEventListener('click', e => {
-      if(!e.target.closest('#hamburger-btn') && !e.target.closest('#mobile-nav-dropdown')){
-        closeMobileMenu();
-      }
-    });
-
-
-  </script>
-  <!-- ══ UPLOAD MODAL ══ -->
-  <div class="upload-modal-backdrop" id="upload-modal-backdrop" onclick="handleBackdropClick(event)">
-    <div class="upload-modal" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
-      <div class="upload-modal-header">
-        <h3 id="upload-modal-title">Add Document to Library</h3>
-        <button class="upload-modal-close" onclick="closeUploadModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="upload-modal-body">
-
-        <!-- Step indicator -->
-        <div class="upload-steps">
-          <div class="upload-step-dot active" id="step-dot-1">1</div>
-          <div class="upload-step-line" id="step-line-1"></div>
-          <div class="upload-step-dot" id="step-dot-2">2</div>
-          <div class="upload-step-line" id="step-line-2"></div>
-          <div class="upload-step-dot" id="step-dot-3">3</div>
-        </div>
-
-        <!-- Step 1: File selection -->
-        <div id="upload-step-1">
-          <div class="modal-drop-area" id="modal-drop-area"
-               onclick="document.getElementById('modal-file-input').click()"
-               ondragover="handleModalDragOver(event)"
-               ondragleave="handleModalDragLeave(event)"
-               ondrop="handleModalDrop(event)">
-            <i class="fa-solid fa-file-arrow-up"></i>
-            <p><strong>Click to browse</strong> or drag &amp; drop your file here</p>
-            <p style="margin-top:4px;font-size:12px;">PDF, DOCX, PPTX, XLSX &middot; Max 50 MB</p>
-          </div>
-          <input type="file" id="modal-file-input" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx" style="display:none" onchange="handleModalFileSelect(this)">
-          <div class="upload-file-name" id="upload-file-name">
-            <i class="fa-solid fa-file" id="upload-file-icon"></i>
-            <span id="upload-file-label">filename.pdf</span>
-            <small id="upload-file-size">0 MB</small>
-          </div>
-        </div>
-
-        <!-- Step 2: Cover image -->
-        <div id="upload-step-2" style="display:none;">
-          <p style="font-size:13px;color:#6b7280;margin:0 0 14px;">Choose how to display the cover for this document.</p>
-          <div class="cover-options">
-            <div class="cover-option selected" id="cover-opt-first" onclick="selectCoverOption('first')">
-              <i class="fa-regular fa-file-image"></i>
-              <span>First Page</span>
-              <small>Auto-preview from document</small>
-            </div>
-            <div class="cover-option" id="cover-opt-upload" onclick="selectCoverOption('upload')">
-              <i class="fa-solid fa-image"></i>
-              <span>Upload Image</span>
-              <small>Pick a custom cover photo</small>
-            </div>
-            <div class="cover-option" id="cover-opt-none" onclick="selectCoverOption('none')">
-              <i class="fa-regular fa-square"></i>
-              <span>No Cover</span>
-              <small>Use default file icon</small>
-            </div>
-          </div>
-
-          <!-- Cover image upload input (shown when "Upload Image" selected) -->
-          <div id="cover-upload-area" style="margin-top:14px;display:none;">
-            <label class="modal-drop-area" for="modal-cover-input" style="display:block;">
-              <i class="fa-solid fa-image"></i>
-              <p><strong>Click to choose a cover image</strong></p>
-              <p style="font-size:12px;margin-top:4px;">JPG, PNG, WEBP &middot; Recommended 400×300</p>
-            </label>
-            <input type="file" id="modal-cover-input" accept="image/*" style="display:none" onchange="handleCoverSelect(this)">
-          </div>
-
-          <!-- Cover preview -->
-          <div class="cover-preview-wrap" id="cover-preview-wrap" style="margin-top:14px;">
-            <img id="cover-preview-img" src="" alt="Cover preview">
-            <button class="remove-cover" onclick="removeCover()" title="Remove cover"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-
-          <!-- First-page placeholder notice -->
-          <div id="first-page-notice" style="margin-top:14px;padding:12px 14px;background:#f9fafb;border-radius:10px;font-size:12px;color:#6b7280;display:flex;gap:8px;align-items:flex-start;">
-            <i class="fa-solid fa-circle-info" style="color:#111827;margin-top:1px;flex-shrink:0;"></i>
-            <span>The first page of your document will be used as the cover thumbnail. In a live environment this would be rendered server-side.</span>
-          </div>
-        </div>
-
-        <!-- Step 3: Details -->
-        <div id="upload-step-3" style="display:none;">
-          <div class="upload-field">
-            <label for="doc-title-input">Document Title</label>
-            <input type="text" id="doc-title-input" placeholder="e.g. Q4 Annual Report 2025">
-          </div>
-          <div class="upload-field">
-            <label for="doc-category-input">Category</label>
-            <select id="doc-category-input">
-              <option value="Report">Report</option>
-              <option value="Proposal">Proposal</option>
-              <option value="Presentation">Presentation</option>
-              <option value="Template">Template</option>
-              <option value="Contract">Contract</option>
-              <option value="Research">Research</option>
-              <option value="Checklist">Checklist</option>
-              <option value="Guide">Guide</option>
-              <option value="Roadmap">Roadmap</option>
-              <option value="Spreadsheet">Spreadsheet</option>
-              <option value="Tool">Tool</option>
-            </select>
-          </div>
-          <div class="upload-field">
-            <label for="doc-comment-input">Short Comment <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#9ca3af;">(optional)</span></label>
-            <textarea id="doc-comment-input" placeholder="Add a brief description or note about this document…"></textarea>
-          </div>
-          <!-- Progress bar (shown during fake upload) -->
-          <div class="upload-progress" id="upload-progress">
-            <div class="upload-progress-bar"><div class="upload-progress-fill" id="upload-progress-fill"></div></div>
-            <p class="upload-progress-label" id="upload-progress-label">Preparing…</p>
-          </div>
-        </div>
-
-      </div><!-- /modal-body -->
-
-      <div class="upload-modal-footer">
-        <div class="upload-modal-footer-left">
-          <button class="modal-btn modal-btn-secondary" id="modal-btn-back" onclick="modalStepBack()" style="display:none;">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </button>
-        </div>
-        <div style="display:flex;gap:8px;">
-          <button class="modal-btn modal-btn-secondary" onclick="closeUploadModal()">Cancel</button>
-          <button class="modal-btn modal-btn-primary" id="modal-btn-next" onclick="modalStepNext()" disabled>
-            Next <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ DOCUMENT VIEWER MODAL ══ -->
-  <div class="viewer-backdrop" id="viewer-backdrop">
-    <!-- Viewer topbar -->
-    <div class="viewer-topbar">
-      <button class="viewer-close-btn" onclick="closeViewer()" title="Close"><i class="fa-solid fa-xmark"></i></button>
-      <div class="viewer-title" id="viewer-title">Document</div>
-      <span class="viewer-meta" id="viewer-meta"></span>
-      <a class="viewer-topbar-btn" id="viewer-download-btn" href="#" download title="Download">
-        <i class="fa-solid fa-download"></i> Download
-      </a>
-      <button class="viewer-topbar-btn" id="viewer-open-btn" title="Open in new tab" style="display:none;">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open
-      </button>
-    </div>
-    <!-- Viewer main: reader + sidebar -->
-    <div class="viewer-main">
-      <!-- Doc body (reader / iframe) -->
-      <div class="viewer-body" id="viewer-body"></div>
-
-      <!-- Right sidebar: Rating + Comments -->
-      <aside class="viewer-sidebar" id="viewer-sidebar">
-        <!-- Tabs -->
-        <div class="viewer-sidebar-tabs">
-          <button class="viewer-sidebar-tab active" onclick="switchSidebarTab('rating',this)">
-            <i class="fa-regular fa-star" style="margin-right:4px;"></i>Rating
-          </button>
-          <button class="viewer-sidebar-tab" onclick="switchSidebarTab('comments',this)">
-            <i class="fa-regular fa-comment" style="margin-right:4px;"></i>Comments
-          </button>
-        </div>
-
-        <!-- Rating panel -->
-        <div class="viewer-sidebar-panel active" id="sidebar-panel-rating">
-          <div class="rating-section">
-            <p class="rating-section-label">Your Rating</p>
-            <div class="star-picker" id="star-picker">
-              <i class="fa-regular fa-star" data-v="1"></i>
-              <i class="fa-regular fa-star" data-v="2"></i>
-              <i class="fa-regular fa-star" data-v="3"></i>
-              <i class="fa-regular fa-star" data-v="4"></i>
-              <i class="fa-regular fa-star" data-v="5"></i>
-            </div>
-            <button class="rating-submit-btn" id="rating-submit-btn" onclick="submitRating()" disabled>Submit Rating</button>
-          </div>
-          <div class="rating-section" id="rating-summary">
-            <p class="rating-section-label">Overall Rating</p>
-            <div class="rating-avg-row">
-              <span class="rating-avg-num" id="rating-avg-num">4.0</span>
-              <div>
-                <div class="rating-avg-stars" id="rating-avg-stars"></div>
-                <div class="rating-avg-detail" id="rating-avg-detail">2 ratings</div>
-              </div>
-            </div>
-            <div id="rating-bars"></div>
-          </div>
-        </div>
-
-        <!-- Comments panel -->
-        <div class="viewer-sidebar-panel" id="sidebar-panel-comments">
-          <div class="comments-list" id="comments-list">
-            <div class="comment-empty" id="comments-empty">
-              <i class="fa-regular fa-comment-dots"></i>
-              No comments yet. Be the first to share your thoughts!
-            </div>
-          </div>
-          <div class="comment-form">
-            <textarea id="comment-text-input" placeholder="Add a comment…" rows="3"></textarea>
-            <div class="comment-form-row">
-              <div class="comment-rating-pick" id="comment-rating-pick">
-                <i class="fa-regular fa-star" data-v="1"></i>
-                <i class="fa-regular fa-star" data-v="2"></i>
-                <i class="fa-regular fa-star" data-v="3"></i>
-                <i class="fa-regular fa-star" data-v="4"></i>
-                <i class="fa-regular fa-star" data-v="5"></i>
-              </div>
-              <button class="comment-submit-btn" onclick="submitComment()">Post</button>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </div>
-
-</body>
-</html>
