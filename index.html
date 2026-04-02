@@ -32,11 +32,11 @@
       line-height:1.35;
     }
     a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:22px 4px 60px;}
+    .container{max-width:100%; margin:0; padding:22px 20px 60px;}
     /* ── TOPBAR ── */
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:8px 16px 16px; position:relative;
+      padding:8px 20px 16px; position:relative;
       background:#fff;
       border-bottom:1px solid var(--line);
       margin-bottom:4px;
@@ -45,8 +45,8 @@
     .topbar.is-sticky{
       position:fixed; top:0; left:0; right:0;
       z-index:200;
-      padding-left: max(16px, calc((100vw - var(--max)) / 2 + 4px));
-      padding-right: max(16px, calc((100vw - var(--max)) / 2 + 4px));
+      padding-left: 20px;
+      padding-right: 20px;
       box-shadow: 0 4px 18px rgba(17,24,39,.08);
     }
     .topbar-placeholder{ display:none; }
@@ -100,6 +100,45 @@
     .topbar-divider{ width:1px; height:22px; background:var(--line); }
 
     .nav-wrap{ display:flex; align-items:center; gap:10px; }
+
+    /* ── SERVICES DROPDOWN ── */
+    .nav-dropdown{ position:relative; }
+    .nav-dropdown-toggle{
+      opacity:.8; white-space:nowrap; cursor:pointer;
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:14px; font-weight:700; color:#111827;
+      background:none; border:none; padding:0; font-family:inherit;
+    }
+    .nav-dropdown-toggle:hover{ opacity:1; }
+    .nav-dropdown-toggle i{ font-size:10px; transition:transform .2s; }
+    .nav-dropdown:hover .nav-dropdown-toggle i,
+    .nav-dropdown.open .nav-dropdown-toggle i{ transform:rotate(180deg); }
+    .nav-dropdown-menu{
+      display:none;
+      position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%);
+      background:#fff; border:1px solid var(--line);
+      border-radius:14px; padding:6px;
+      min-width:200px;
+      box-shadow: 0 12px 30px rgba(17,24,39,.12);
+      z-index:300;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown.open .nav-dropdown-menu{ display:block; }
+    .nav-dropdown-menu a,
+    .nav-dropdown-menu button{
+      display:flex; align-items:center; gap:10px;
+      padding:9px 12px; border-radius:9px;
+      font-size:13px; font-weight:600; color:#374151;
+      width:100%; text-align:left; background:none; border:none;
+      cursor:pointer; font-family:inherit;
+      transition:background .15s, color .15s;
+    }
+    .nav-dropdown-menu a:hover,
+    .nav-dropdown-menu button:hover{ background:#f3f4f6; color:#111827; }
+    .nav-dropdown-menu i{ width:16px; text-align:center; color:var(--muted); font-size:12px; }
+    .nav-dropdown-divider{ height:1px; background:var(--line); margin:5px 6px; }
+    .nav-dropdown-menu .lib-item{ color:#111827; }
+    .nav-dropdown-menu .lib-item i{ color:#111827; }
     .nav{
       display:flex; gap:18px; align-items:center;
       color:#111827; font-size:14px; font-weight:700;
@@ -121,7 +160,6 @@
     }
     .hero::before{
       content:"";
-      Top: 20px;
       position:absolute; inset:0;
       background-image:url('1.jpg');
       background-size:cover;
@@ -1118,7 +1156,23 @@
       <div class="nav-wrap" id="topbar-main-nav">
         <nav id="primary-nav" class="nav" aria-label="Primary">
           <a href="#about" class="main-nav-item">About</a>
-          <a href="#catalog" class="main-nav-item">Services</a>
+          <!-- Services dropdown -->
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-toggle">
+              Services <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="#catalog"><i class="fa-solid fa-briefcase"></i> All Services</a>
+              <a href="#catalog"><i class="fa-solid fa-code"></i> Software Design</a>
+              <a href="#catalog"><i class="fa-solid fa-chart-bar"></i> Data &amp; Analytics</a>
+              <a href="#catalog"><i class="fa-solid fa-shield-halved"></i> Cyber Security</a>
+              <a href="#catalog"><i class="fa-solid fa-bullhorn"></i> Digital Marketing</a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="#library" id="nav-lib-link" class="lib-item">
+                <i class="fa-solid fa-books"></i> Library
+              </a>
+            </div>
+          </div>
           <a href="#process" class="main-nav-item">How we work</a>
           <a href="#contacts" class="main-nav-item">Contacts</a>
         </nav>
@@ -1126,9 +1180,6 @@
 
       <!-- Right icons (main site) -->
       <div class="topbar-right" id="topbar-right-main">
-        <a href="#library" class="nav-library-link" id="nav-lib-link" title="Open Library">
-          <i class="fa-solid fa-books" style="margin-right:5px;"></i>Library
-        </a>
         <!-- Welcome (mobile only) -->
         <span class="welcome mobile-welcome">Welcome to Siweni !</span>
         <!-- Hamburger (mobile only) -->
