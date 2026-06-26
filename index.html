@@ -40,7 +40,7 @@
     -webkit-font-smoothing:antialiased;
   }
   img{max-width:100%;display:block;}
-  h1,h2,h3,h4{font-family:'Plus+Jakarta+Sans',sans-serif;margin:0;color:var(--ink);letter-spacing:-0.01em;}
+  h1,h2,h3,h4{font-family:'Plus+Jakarta+Sans',sans-serif;margin:0;color: #fff;letter-spacing:-0.01em;}
   p{margin:0;color:var(--muted);line-height:1.65;}
   a{color:inherit;text-decoration:none;}
   button{font-family:inherit;cursor:pointer;border:none;background:none;}
@@ -60,20 +60,43 @@
 
   /* ---------- HEADER ---------- */
   header{position:absolute;top:24px;left:0;right:0;z-index:30;}
-  .nav-pill{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-pill);padding:10px 12px 10px 18px;color:black;}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;white-space:nowrap;}
+  .nav-pill{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;backdrop-filter:blur(14px);border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-pill);padding:10px 12px 10px 18px;color:var(--dark);}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;white-space:nowrap;color:var(--dark);}
   .logo img{height:32px;}
   .logo .mark{width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .nav-links{display:none;align-items:center;gap:28px;font-size:14.5px;font-weight:500;color:rgba(255,255,255,0.85);}
-  .nav-links a:hover{color:#fff;}
+  .nav-links{display:none;align-items:center;gap:28px;font-size:14.5px;font-weight:500;color: var(--ink-soft);}
+  .nav-links a:hover{color:var(--dark);}
   @media (min-width:980px){ .nav-links{display:flex;} }
   .nav-actions{display:flex;align-items:center;gap:14px;}
-  .nav-actions .login{display:none;font-size:14.5px;font-weight:500;color:rgba(255,255,255,0.85);}
+  .nav-actions .login{display:none;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
   @media (min-width:980px){ .nav-actions .login{display:inline;} }
-  .nav-actions .signup{background:#fff;color:var(--dark);padding:9px 18px;border-radius:var(--radius-pill);font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
-  .burger{display:flex;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.12);align-items:center;justify-content:center;}
+  .nav-actions .signup{background:var(--dark);color:#fff;padding:9px 18px;border-radius:var(--radius-pill);font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px;}
+  .burger{display:flex;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.1);align-items:center;justify-content:center;}
+  .burger svg{fill:var(--dark);}
   @media (min-width:980px){ .burger{display:none;} }
-  .burger svg{width:16px;height:16px;}
+
+  /* Services Dropdown */
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-toggle{opacity:.8;white-space:nowrap;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-size:14.5px;font-weight:700;color:var(--ink-soft);background:none;border:none;padding:0;font-family:inherit;}
+  .nav-dropdown-toggle:hover{opacity:1;color:var(--dark);}
+  .nav-dropdown-toggle i{font-size:10px;transition:transform .2s;}
+  .nav-dropdown:hover .nav-dropdown-toggle i{transform:rotate(180deg);}
+  .nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px;min-width:200px;box-shadow:0 12px 30px rgba(17,24,39,.12);z-index:300;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:block;}
+  .nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:600;color:#374151;width:100%;text-align:left;transition:background .15s,color .15s;}
+  .nav-dropdown-menu a:hover{background:#f3f4f6;color:#111827;}
+  .nav-dropdown-menu i{width:16px;text-align:center;color:var(--muted);font-size:12px;}
+  .nav-dropdown-divider{height:1px;background:var(--line);margin:5px 6px;}
+  .nav-dropdown-menu .lib-item{color:#111827;}
+  .nav-dropdown-menu .lib-item i{color:#111827;}
+
+  /* Search Bar */
+  .topbar-center{display:none;align-items:center;gap:8px;flex:1;max-width:300px;margin:0 20px;}
+  .topbar-search{display:flex;align-items:center;gap:8px;flex:1;border:1px solid rgba(0,0,0,0.1);border-radius:999px;padding:7px 14px;background:rgba(0,0,0,0.03);}
+  .topbar-search i{color:var(--ink-soft);font-size:13px;flex-shrink:0;}
+  .topbar-search input{border:none;outline:none;font:inherit;font-size:13px;color:var(--ink);background:transparent;flex:1;min-width:0;}
+  .topbar-search input::placeholder{color:var(--muted);}
+  @media (min-width:980px){ .topbar-center{display:flex;} }
 
   /* ---------- HERO ---------- */
   .hero{position:relative;min-height:760px;color:#fff;overflow:hidden;}
@@ -186,28 +209,6 @@
   .process-step h4{font-size:16px;font-weight:700;margin-bottom:4px;}
   .process-step p{font-size:13.5px;color:var(--muted);}
 
-  /* ---------- FAQ ---------- */
-  .faq-wrap{display:grid;gap:40px;grid-template-columns:1fr;}
-  @media (min-width:900px){ .faq-wrap{grid-template-columns:0.85fr 1fr;align-items:stretch;} }
-  .faq-media{position:relative;border-radius:var(--radius-xl);overflow:hidden;min-height:380px;background:#2a2820;}
-  .faq-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-  .faq-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.88) 100%);}
-  .faq-media-body{position:absolute;left:26px;right:26px;bottom:26px;z-index:2;color:#fff;}
-  .faq-media-body h3{font-size:20px;font-weight:700;margin-bottom:16px;line-height:1.3;}
-
-  .faq-list{display:flex;flex-direction:column;}
-  .faq-item{border-bottom:1px solid var(--line);}
-  .faq-item:first-child{border-top:1px solid var(--line);}
-  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 4px;text-align:left;font-size:16px;font-weight:600;color:var(--ink);}
-  .faq-q .ic{width:30px;height:30px;border-radius:50%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
-  .faq-q .ic::before,.faq-q .ic::after{content:"";position:absolute;background:var(--ink);border-radius:1px;}
-  .faq-q .ic::before{width:11px;height:1.6px;}
-  .faq-q .ic::after{width:1.6px;height:11px;transition:transform .25s ease;}
-  .faq-item.open .faq-q .ic::after{transform:rotate(90deg);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
-  .faq-a-in{padding:0 4px 22px;font-size:14px;max-width:520px;}
-  .faq-item.open .faq-a{max-height:220px;}
-
   /* ---------- TESTIMONIALS ---------- */
   .testi-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-bottom:46px;}
   .testi-head h2{font-size:30px;font-weight:700;}
@@ -225,7 +226,7 @@
   footer{background:var(--dark);color:#fff;}
   .footer-cta{position:relative;overflow:hidden;border-radius:var(--radius-xl);margin:60px 24px 0;min-height:300px;display:flex;align-items:center;background:#1f2937;}
   @media (min-width:900px){ .footer-cta{margin:80px 56px 0;} }
-  .footer-cta-bg{position:absolute;inset:0;background:linear-gradient(120deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;}
+  .footer-cta-bg{position:absolute;inset:0;background:linear-gradient(120deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1451187580459-432690279c0fa?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;}
   .footer-cta-in{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;gap:26px;padding:44px 32px;}
   @media (min-width:760px){ .footer-cta-in{flex-direction:row;align-items:center;justify-content:space-between;padding:44px 50px;} }
   .footer-cta-in h2{font-size:30px;font-weight:700;color:#fff;max-width:420px;line-height:1.22;}
@@ -287,7 +288,7 @@
   @media (min-width:640px){ .lib-grid{grid-template-columns:repeat(2,1fr);} }
   @media (min-width:1024px){ .lib-grid{grid-template-columns:repeat(3,1fr);} }
 
-  .doc-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.05);transition:transform .25s, box-shadow .25s;cursor:pointer;}
+  .doc-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.05);transition:transform .25s,box-shadow .25s;cursor:pointer;}
   .doc-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,0.12);}
   .doc-cover{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#1f2937,#374151);}
   .doc-cover[style*="background-image"]{background-size:cover;background-position:center;}
@@ -301,7 +302,7 @@
   .doc-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;}
   .doc-meta{font-size:13px;color:var(--muted);margin-bottom:12px;}
   .doc-stars{display:flex;gap:4px;margin-bottom:12px;color:#fbbf24;}
-  .doc-stars .empty{color:#d1d5db;}
+  .doc-stars .empty{color:#e5e7eb;}
   .doc-actions{display:flex;gap:8px;}
   .doc-btn{flex:1;padding:10px;border-radius:var(--radius-pill);border:1px solid var(--line);background:#fff;color:var(--ink);font-size:13px;font-weight:700;cursor:pointer;transition:background .2s;}
   .doc-btn:hover{background:var(--bg-soft);}
@@ -309,7 +310,7 @@
   .doc-btn.primary:hover{background:var(--dark-2);}
 
   .lib-tabs-topbar{display:flex;gap:8px;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-pill);padding:6px;}
-  .lib-tab{padding:8px 16px;border-radius:999px;border:none;background:transparent;color:var(--muted);font-size:14px;font-weight:700;cursor:pointer;transition:background .2s, color .2s;}
+  .lib-tab{padding:8px 16px;border-radius:999px;border:none;background:transparent;color:var(--muted);font-size:14px;font-weight:700;cursor:pointer;transition:background .2s,color .2s;}
   .lib-tab:hover{color:var(--ink);}
   .lib-tab.active{background:var(--dark);color:#fff;}
   .lib-pagination{display:flex;justify-content:space-between;align-items:center;margin-top:32px;color:var(--muted);font-size:14px;}
@@ -319,6 +320,60 @@
   .lib-page-btn.active{background:var(--dark);color:#fff;border-color:var(--dark);}
   .lib-page-btn.arrow{color:var(--muted);}
 
+  /* Upload Modal */
+  .upload-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px;}
+  .upload-modal-backdrop.open{display:flex;}
+  .upload-modal{background:#fff;border-radius:24px;width:100%;max-width:560px;box-shadow:0 32px 80px rgba(0,0,0,.22);overflow:hidden;display:flex;flex-direction:column;max-height:90vh;}
+  .upload-modal-header{padding:22px 24px 0;display:flex;align-items:center;justify-content:space-between;}
+  .upload-modal-close{width:32px;height:32px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;display:grid;place-items:center;font-size:14px;color:#6b7280;transition:background .2s;}
+  .upload-modal-close:hover{background:#f3f4f6;color:#111827;}
+  .upload-modal-body{padding:20px 24px;overflow-y:auto;flex:1;}
+  .upload-steps{display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+  .upload-step-dot{width:28px;height:28px;border-radius:999px;background:#f3f4f6;border:2px solid #e5e7eb;display:grid;place-items:center;font-size:11px;font-weight:700;color:#9ca3af;flex-shrink:0;transition:all .2s;}
+  .upload-step-dot.active{background:#111827;border-color:#111827;color:#fff;}
+  .upload-step-dot.done{background:#111827;border-color:#111827;color:#fff;}
+  .upload-step-line{flex:1;height:2px;background:#e5e7eb;}
+  .upload-step-line.done{background:#111827;}
+  .modal-drop-area{border:2px dashed #d1d5db;border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:#fafafa;}
+  .modal-drop-area:hover,.modal-drop-area.dragover{border-color:#111827;background:#f3f4f6;}
+  .modal-drop-area i{font-size:32px;color:#111827;margin-bottom:8px;display:block;}
+  .modal-drop-area p{margin:0;color:#6b7280;font-size:13px;}
+  .modal-drop-area strong{color:#111827;}
+  .cover-options{display:flex;gap:12px;margin-top:4px;}
+  .cover-option{flex:1;border:2px solid #e5e7eb;border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:#fff;}
+  .cover-option:hover{border-color:#111827;background:#fafafa;}
+  .cover-option.selected{border-color:#111827;background:#f3f4f6;}
+  .cover-option i{font-size:22px;color:#111827;margin-bottom:6px;display:block;}
+  .cover-option span{font-size:12px;font-weight:700;display:block;color:#111827;}
+  .cover-option small{font-size:11px;color:#9ca3af;margin-top:2px;display:block;}
+  .cover-preview-wrap{width:100%;height:130px;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;display:none;position:relative;background:#f9fafb;}
+  .cover-preview-wrap.visible{display:block;}
+  .cover-preview-wrap img{width:100%;height:100%;object-fit:cover;}
+  .cover-preview-wrap .remove-cover{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:999px;background:rgba(0,0,0,.6);border:none;cursor:pointer;display:grid;place-items:center;color:#fff;font-size:11px;}
+  .upload-field{margin-top:16px;}
+  .upload-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#6b7280;margin-bottom:6px;}
+  .upload-field input,.upload-field textarea,.upload-field select{width:100%;border:1px solid #e5e7eb;border-radius:10px;padding:9px 12px;font:inherit;font-size:13px;color:#111827;background:#fff;outline:none;transition:border-color .2s;}
+  .upload-field input:focus,.upload-field textarea:focus,.upload-field select:focus{border-color:#111827;}
+  .upload-field textarea{min-height:72px;resize:vertical;}
+  .upload-file-name{display:none;align-items:center;gap:10px;background:#f3f4f6;border-radius:10px;padding:10px 14px;margin-top:10px;}
+  .upload-file-name.visible{display:flex;}
+  .upload-file-name i{color:#111827;font-size:16px;flex-shrink:0;}
+  .upload-file-name span{font-size:13px;font-weight:600;color:#111827;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .upload-file-name small{font-size:11px;color:#9ca3af;flex-shrink:0;}
+  .upload-modal-footer{padding:16px 24px;border-top:1px solid #f3f4f6;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .upload-modal-footer-left{display:flex;gap:8px;align-items:center;}
+  .modal-btn{padding:9px 20px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s,transform .2s;border:none;}
+  .modal-btn-secondary{background:#f3f4f6;color:#111827;border:1px solid #e5e7eb;}
+  .modal-btn-secondary:hover{background:#e5e7eb;}
+  .modal-btn-primary{background:#111827;color:#fff;}
+  .modal-btn-primary:hover{background:#1f2937;transform:translateY(-1px);}
+  .modal-btn-primary:disabled{background:#d1d5db;cursor:not-allowed;transform:none;}
+  .upload-progress{margin-top:12px;display:none;}
+  .upload-progress.visible{display:block;}
+  .upload-progress-bar{height:4px;background:#f3f4f6;border-radius:999px;overflow:hidden;}
+  .upload-progress-fill{height:100%;background:#111827;border-radius:999px;width:0%;transition:width .4s ease;}
+  .upload-progress-label{font-size:11px;color:#9ca3af;margin-top:6px;text-align:center;}
+
   /* Mobile header adjustments */
   @media (max-width:980px){
     .nav-pill .nav-links{
@@ -326,14 +381,26 @@
       position:absolute;
       top:60px;
       right:24px;
-      background:rgba(17,24,39,0.98);
+      background:#fff;
       padding:16px;
       border-radius:16px;
       flex-direction:column;
       gap:12px;
-      border:1px solid rgba(255,255,255,0.1);
+      border:1px solid rgba(0,0,0,0.1);
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);
     }
     .nav-pill .nav-links.mobile-open{display:flex;}
+    .nav-pill .nav-links a{
+      color:var(--ink-soft);
+    }
+    .nav-pill .nav-links a:hover{
+      color:var(--dark);
+    }
+    .nav-dropdown-menu{
+      position:static;
+      transform:none;
+      margin-top:10px;
+    }
   }
 
   @media (max-width:759px){
@@ -356,14 +423,35 @@
     <nav class="nav-pill">
       <div class="logo" id="logo-link">
         <img src="siweni_converted.png" alt="Siweni">
+        Siweni
+      </div>
+      <div class="topbar-center">
+        <div class="topbar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search services, resources…">
+        </div>
       </div>
       <div class="nav-links" id="nav-links">
         <a href="#home">Home</a>
-        <a href="#services">Services</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">
+            Services <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="#services"><i class="fa-solid fa-briefcase"></i> All Services</a>
+            <a href="#services"><i class="fa-solid fa-code"></i> Software Design</a>
+            <a href="#services"><i class="fa-solid fa-chart-bar"></i> Data &amp; Analytics</a>
+            <a href="#services"><i class="fa-solid fa-shield-halved"></i> Cyber Security</a>
+        <a href="#services"><i class="fa-solid fa-bullhorn"></i> Digital Marketing</a>
+        <a href="#programs"><i class="fa-solid fa-graduation-cap"></i> Company Programs</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="#" id="nav-lib-link" class="lib-item"><i class="fa-solid fa-books"></i> Library</a>
+          </div>
+        </div>
         <a href="#about">About</a>
+        <a href="#programs">Programs</a>
         <a href="#process">Process</a>
         <a href="#contacts">Contacts</a>
-        <a href="#" id="nav-lib-link">Library</a>
       </div>
       <div class="nav-actions">
         <a class="signup" href="#contacts">Get Started <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -441,10 +529,17 @@
         </div>
       </div>
       <div class="journey-card">
-        <img src="5.png" alt="Digital Marketing">
+        <img src="5.png" alt="Cyber Security">
+        <div class="body">
+          <h3>Cyber Security</h3>
+          <p>Protect your business with advanced security solutions and audits.</p>
+        </div>
+      </div>
+      <div class="journey-card">
+        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=600&q=80" alt="Digital Marketing">
         <div class="body">
           <h3>Digital Marketing & SEO</h3>
-          <p>Growth campaigns and content to expand your reach.</p>
+          <p>Growth campaigns and content to expand your reach and engagement.</p>
         </div>
       </div>
     </div>
@@ -573,6 +668,39 @@
   </div>
 </section>
 
+<!-- COMPANY PROGRAMS -->
+<section id="programs" style="background:var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Company Programs</h2>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-card">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80" alt="Training Workshops" onerror="this.remove()">
+        <span class="expand"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="#111827" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="body">
+          <h3>Training Workshops</h3>
+          <p>Upskill your team with our specialized training in software, data, and security.</p>
+        </div>
+      </div>
+      <div class="journey-card">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80" alt="Partnering Program" onerror="this.remove()">
+        <div class="body">
+          <h3>Partnering Program</h3>
+          <p>Collaborate with us for mutual growth, co-development, and shared success.</p>
+        </div>
+      </div>
+      <div class="journey-card">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt="Community Outreach" onerror="this.remove()">
+        <div class="body">
+          <h3>Community Outreach</h3>
+          <p>Tech literacy programs and free workshops for underserved communities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="wrap">
@@ -690,7 +818,10 @@
         <button class="lib-tab" onclick="libTabAll(this,'pptx')">Slides</button>
         <button class="lib-tab" onclick="libTabAll(this,'xlsx')">Sheets</button>
       </div>
-      <button class="btn" onclick="showMain(event)"><span class="arrow" style="background:var(--dark);color:#fff;transform:rotate(180deg);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Back to Site</button>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn" onclick="openUploadModal()"><i class="fa-solid fa-upload" style="margin-right:8px;"></i> Upload</button>
+        <button class="btn light" onclick="showMain(event)"><span class="arrow" style="background:var(--dark);color:#fff;transform:rotate(180deg);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Back to Site</button>
+      </div>
     </div>
     <div class="lib-layout">
       <aside class="lib-sidebar">
@@ -705,6 +836,19 @@
           <label class="lib-filter-item"><input type="checkbox"> Checklists <span class="lib-filter-count">1</span></label>
         </div>
         <div class="lib-sidebar-divider"></div>
+        <div class="lib-filter-group" data-group="filetype">
+          <span class="lib-filter-label">File Type</span>
+          <label class="lib-filter-item"><input type="checkbox" checked> PDF <span class="lib-filter-count">3</span></label>
+          <label class="lib-filter-item"><input type="checkbox"> Word <span class="lib-filter-count">2</span></label>
+          <label class="lib-filter-item"><input type="checkbox"> PowerPoint <span class="lib-filter-count">2</span></label>
+          <label class="lib-filter-item"><input type="checkbox"> Excel <span class="lib-filter-count">1</span></label>
+        </div>
+        <div class="lib-sidebar-divider"></div>
+        <div class="lib-filter-group" data-group="year">
+          <span class="lib-filter-label">Year</span>
+          <label class="lib-filter-item"><input type="checkbox" checked> 2025 <span class="lib-filter-count">4</span></label>
+          <label class="lib-filter-item"><input type="checkbox" checked> 2024 <span class="lib-filter-count">4</span></label>
+        </div>
         <button class="lib-refine-btn"><i class="fa-solid fa-sliders"></i> Refine Search</button>
         <span class="lib-reset-link" onclick="resetFilters()">Reset all filters</span>
       </aside>
@@ -812,6 +956,40 @@
               </div>
             </div>
           </div>
+          <div class="doc-card" data-type="word" data-title="Client Onboarding Checklist">
+            <div class="doc-cover" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80');">
+              <i class="fa-solid fa-file-word doc-cover-icon" style="display:none;"></i>
+              <span class="doc-cover-badge">DOCX</span>
+              <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+            </div>
+            <div class="doc-body">
+              <p class="doc-type">Checklist</p>
+              <p class="doc-title">Client Onboarding Checklist</p>
+              <p class="doc-meta">Operations · Oct 2024 · 0.5 MB</p>
+              <div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star empty"></i><i class="fa-regular fa-star empty"></i></div>
+              <div class="doc-actions">
+                <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+              </div>
+            </div>
+          </div>
+          <div class="doc-card" data-type="pdf" data-title="Software Dev Roadmap">
+            <div class="doc-cover" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80');">
+              <i class="fa-solid fa-map doc-cover-icon" style="display:none;"></i>
+              <span class="doc-cover-badge">PDF</span>
+              <button class="doc-wishlist"><i class="fa-regular fa-bookmark"></i></button>
+            </div>
+            <div class="doc-body">
+              <p class="doc-type">Roadmap</p>
+              <p class="doc-title">Software Dev Roadmap</p>
+              <p class="doc-meta">Engineering · Sep 2024 · 1.8 MB</p>
+              <div class="doc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <div class="doc-actions">
+                <button class="doc-btn"><i class="fa-regular fa-eye"></i> Preview</button>
+                <button class="doc-btn primary"><i class="fa-solid fa-download"></i> Download</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="lib-pagination">
           <span id="lib-count">Showing 8 documents</span>
@@ -823,6 +1001,103 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- UPLOAD MODAL -->
+<div class="upload-modal-backdrop" id="upload-modal-backdrop" onclick="handleBackdropClick(event)">
+  <div class="upload-modal">
+    <div class="upload-modal-header">
+      <h3 style="font-size:18px;letter-spacing:-.2px;margin:0;">Upload Document</h3>
+      <button class="upload-modal-close" onclick="closeUploadModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="upload-modal-body">
+      <div class="upload-steps">
+        <div class="upload-step-dot" id="step-dot-1">1</div>
+        <div class="upload-step-line" id="step-line-1"></div>
+        <div class="upload-step-dot" id="step-dot-2">2</div>
+        <div class="upload-step-line" id="step-line-2"></div>
+        <div class="upload-step-dot" id="step-dot-3">3</div>
+      </div>
+      <div id="upload-step-1">
+        <div class="modal-drop-area" id="modal-drop-area" onclick="document.getElementById('modal-file-input').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <p>Drag & drop your file here, or <strong>browse</strong></p>
+        </div>
+        <input type="file" id="modal-file-input" style="display:none;" onchange="handleModalFileSelect(this)">
+        <div class="upload-file-name" id="upload-file-name">
+          <i class="fa-solid fa-file" id="upload-file-icon"></i>
+          <span id="upload-file-label"></span>
+          <small id="upload-file-size"></small>
+        </div>
+      </div>
+      <div id="upload-step-2" style="display:none;">
+        <label class="lib-filter-label">Choose cover image</label>
+        <div class="cover-options">
+          <div class="cover-option selected" id="cover-opt-first" onclick="selectCoverOption('first')">
+            <i class="fa-solid fa-file-image"></i>
+            <span>First page</span>
+            <small>Auto-generate</small>
+          </div>
+          <div class="cover-option" id="cover-opt-upload" onclick="selectCoverOption('upload')">
+            <i class="fa-solid fa-upload"></i>
+            <span>Upload custom</span>
+            <small>JPG/PNG</small>
+          </div>
+          <div class="cover-option" id="cover-opt-none" onclick="selectCoverOption('none')">
+            <i class="fa-solid fa-minus"></i>
+            <span>No cover</span>
+            <small>Use default</small>
+          </div>
+        </div>
+        <div id="cover-upload-area" style="margin-top:12px;display:none;">
+          <div class="modal-drop-area" onclick="document.getElementById('modal-cover-input').click()">
+            <i class="fa-solid fa-image"></i>
+            <p>Upload cover image</p>
+          </div>
+          <input type="file" id="modal-cover-input" accept="image/*" style="display:none;" onchange="handleCoverSelect(this)">
+        </div>
+        <div class="cover-preview-wrap" id="cover-preview-wrap">
+          <img id="cover-preview-img" src="" alt="Cover preview">
+          <button class="remove-cover" onclick="removeCover(event)"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div id="upload-step-3" style="display:none;">
+        <div class="upload-field">
+          <label for="doc-title-input">Document title</label>
+          <input type="text" id="doc-title-input" placeholder="Enter document title">
+        </div>
+        <div class="upload-field">
+          <label for="doc-category-input">Category</label>
+          <select id="doc-category-input">
+            <option>Reports</option>
+            <option>Proposals</option>
+            <option>Presentations</option>
+            <option>Templates</option>
+            <option>Guides</option>
+            <option>Checklists</option>
+          </select>
+        </div>
+        <div class="upload-field">
+          <label for="doc-comment-input">Description</label>
+          <textarea id="doc-comment-input" placeholder="Add a description (optional)"></textarea>
+        </div>
+        <div class="upload-progress" id="upload-progress">
+          <div class="upload-progress-bar">
+            <div class="upload-progress-fill" id="upload-progress-fill"></div>
+          </div>
+          <div class="upload-progress-label">Uploading...</div>
+        </div>
+      </div>
+    </div>
+    <div class="upload-modal-footer">
+      <div class="upload-modal-footer-left">
+        <button class="modal-btn modal-btn-secondary" id="modal-btn-back" style="display:none;" onclick="modalStepBack()">Back</button>
+      </div>
+      <button class="modal-btn modal-btn-primary" id="modal-btn-next" disabled onclick="modalStepNext()">Next</button>
     </div>
   </div>
 </div>
@@ -843,7 +1118,7 @@
     <div class="footer-top">
       <div class="footer-newsletter">
         <div class="logo" style="margin-bottom:16px;">
-          <img src="siweni_converted.png" alt="Siweni" style="height:32px;">
+          <img src="siweni_converted.png" alt="" style="height:32px;">
         </div>
         <p>Stay updated with our latest insights and resources.</p>
         <form class="subscribe-row" id="subForm">
@@ -853,7 +1128,7 @@
           </button>
         </form>
         <div class="socials">
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 18V9.75H5.67V18h2.67zM7 8.66a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18.34 18v-4.6c0-2.46-1.32-3.6-3.08-3.6-1.42 0-2.05.78-2.4 1.33V9.75H10.2c.03.7 0 8.25 0 8.25h2.67v-4.6c0-.25.02-.5.1-.68.2-.5.66-1.02 1.43-1.02 1.01 0 1.41.77 1.41 1.9V18h2.53z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 18V9.75H5.67V18h2.67zM7 8.66a1.5 1.5 0 100-3 1.5 1.5 0 010 3zM18.34 18v-4.6c0-2.46-1.32-3.6-3.08-3.6-1.42 0-2.05.78-2.4 1.33V9.75H10.2c.03.7 0 8.25 0 8.25h2.67v-4.6c0-.25.02-.5.1-.68.2-.5.66-1.02 1.43-1.02 1.01 0 1.41.77 1.41 1.9V18h2.53z"/></svg></a>
           <a href="#" aria-label="Twitter/X"><svg viewBox="0 0 24 24"><path d="M17.9 3H21l-7 8 7.5 10h-5.9l-4.6-6-5.3 6H2.5l7.5-8.5L2.7 3h6l4.2 5.6L17.9 3z"/></svg></a>
         </div>
       </div>
@@ -863,6 +1138,7 @@
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#programs">Company Programs</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#contacts">Contacts</a></li>
@@ -965,7 +1241,7 @@
   function libTabAll(btn, type){
     document.querySelectorAll('.lib-tab').forEach(t=>{
       t.classList.remove('active');
-      if(t.getAttribute('onclick')?.includes(`'${type}'`)){
+      if(t.getAttribute('onclick')?.includes("'"+type+"'")){
         t.classList.add('active');
       }
     });
@@ -986,6 +1262,171 @@
       alert('Thank you for your message! We will get back to you soon.');
       contactForm.reset();
     });
+  }
+
+  // Upload modal functions
+  let modalStep = 1;
+  let selectedFile = null;
+  let coverOption = 'first';
+  let coverDataUrl = null;
+
+  function openUploadModal(){
+    modalStep = 1;
+    selectedFile = null;
+    coverOption = 'first';
+    coverDataUrl = null;
+    renderModalStep();
+    document.getElementById('upload-modal-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeUploadModal(){
+    document.getElementById('upload-modal-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+    resetModalForm();
+  }
+
+  function handleBackdropClick(e){
+    if(e.target === document.getElementById('upload-modal-backdrop')) closeUploadModal();
+  }
+
+  function resetModalForm(){
+    document.getElementById('modal-file-input').value = '';
+    document.getElementById('modal-cover-input').value = '';
+    document.getElementById('upload-file-name').classList.remove('visible');
+    document.getElementById('cover-preview-wrap').classList.remove('visible');
+    document.getElementById('upload-progress').classList.remove('visible');
+    document.getElementById('doc-title-input').value = '';
+    document.getElementById('doc-comment-input').value = '';
+    document.getElementById('doc-category-input').selectedIndex = 0;
+    selectCoverOption('first');
+  }
+
+  function renderModalStep(){
+    [1,2,3].forEach(n=>{
+      document.getElementById('upload-step-'+n).style.display = n === modalStep ? '' : 'none';
+    });
+    // Step dots
+    [1,2,3].forEach(n=>{
+      const dot = document.getElementById('step-dot-'+n);
+      dot.classList.toggle('done', n < modalStep);
+      dot.classList.toggle('active', n === modalStep);
+      if(n < modalStep) dot.innerHTML = '<i class="fa-solid fa-check" style="font-size:10px;"></i>';
+      else dot.textContent = n;
+    });
+    [1,2].forEach(n=>{
+      document.getElementById('step-line-'+n)?.classList.toggle('done', n < modalStep);
+    });
+    // Back button
+    document.getElementById('modal-btn-back').style.display = modalStep > 1 ? '' : 'none';
+    // Next/Submit button
+    const nextBtn = document.getElementById('modal-btn-next');
+    nextBtn.disabled = (modalStep === 1 && !selectedFile);
+    nextBtn.innerHTML = modalStep === 3 ? '<i class="fa-solid fa-check"></i> Add to Library' : 'Next <i class="fa-solid fa-arrow-right"></i>';
+  }
+
+  function modalStepNext(){
+    if(modalStep === 1 && !selectedFile) return;
+    if(modalStep === 3){
+      submitUpload();
+      return;
+    }
+    modalStep++;
+    // Pre-fill title from filename on step 3
+    if(modalStep === 3 && selectedFile){
+      const titleInput = document.getElementById('doc-title-input');
+      if(!titleInput.value) titleInput.value = selectedFile.name.replace(/\.[^/.]+$/, '');
+    }
+    renderModalStep();
+  }
+
+  function modalStepBack(){
+    if(modalStep > 1){
+      modalStep--;
+      renderModalStep();
+    }
+  }
+
+  function handleModalFileSelect(input){
+    if(input.files[0]) setSelectedFile(input.files[0]);
+  }
+
+  function handleDrop(e){
+    e.preventDefault();
+    document.getElementById('modal-drop-area').classList.remove('dragover');
+    const f = e.dataTransfer.files[0];
+    if(f) setSelectedFile(f);
+  }
+
+  function handleDragOver(e){
+    e.preventDefault();
+    document.getElementById('modal-drop-area').classList.add('dragover');
+  }
+
+  function handleDragLeave(e){
+    document.getElementById('modal-drop-area').classList.remove('dragover');
+  }
+
+  function setSelectedFile(f){
+    selectedFile = f;
+    const iconMap = {pdf:'fa-file-pdf', docx:'fa-file-word', doc:'fa-file-word', pptx:'fa-file-powerpoint', ppt:'fa-file-powerpoint', xlsx:'fa-file-excel', xls:'fa-file-excel'};
+    const ext = f.name.split('.').pop().toLowerCase();
+    document.getElementById('upload-file-icon').className = 'fa-solid ' + (iconMap[ext] || 'fa-file');
+    document.getElementById('upload-file-label').textContent = f.name;
+    document.getElementById('upload-file-size').textContent = (f.size / (1024 * 1024)).toFixed(1) + ' MB';
+    document.getElementById('upload-file-name').classList.add('visible');
+    renderModalStep();
+  }
+
+  function selectCoverOption(opt){
+    coverOption = opt;
+    ['first','upload','none'].forEach(o=>{
+      document.getElementById('cover-opt-'+o)?.classList.toggle('selected', o === opt);
+    });
+    document.getElementById('cover-upload-area').style.display = opt === 'upload' ? '' : 'none';
+    if(opt !== 'upload'){
+      coverDataUrl = null;
+      document.getElementById('cover-preview-wrap').classList.remove('visible');
+    }
+  }
+
+  function handleCoverSelect(input){
+    const f = input.files[0];
+    if(!f) return;
+    const reader = new FileReader();
+    reader.onload = ev=>{
+      coverDataUrl = ev.target.result;
+      document.getElementById('cover-preview-img').src = coverDataUrl;
+      document.getElementById('cover-preview-wrap').classList.add('visible');
+    };
+    reader.readAsDataURL(f);
+  }
+
+  function removeCover(e){
+    e.stopPropagation();
+    coverDataUrl = null;
+    document.getElementById('modal-cover-input').value = '';
+    document.getElementById('cover-preview-wrap').classList.remove('visible');
+  }
+
+  function submitUpload(){
+    const progress = document.getElementById('upload-progress');
+    const progressFill = document.getElementById('upload-progress-fill');
+    progress.classList.add('visible');
+    let width = 0;
+    const interval = setInterval(()=>{
+      if(width >= 100){
+        clearInterval(interval);
+        setTimeout(()=>{
+          alert('Document uploaded successfully!');
+          closeUploadModal();
+        }, 500);
+      }else{
+        width += Math.floor(Math.random() * 10) + 5;
+        if(width > 100) width = 100;
+        progressFill.style.width = width + '%';
+      }
+    }, 150);
   }
 </script>
 </body>
